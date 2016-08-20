@@ -9,22 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var RECIPES = [
-    { id: 11, name: 'Rustic Sourdough' },
-    { id: 12, name: 'Whole Wheat' },
-    { id: 13, name: 'Pan loaf' }
-];
+var recipe_service_1 = require('./recipe.service');
 var AppComponent = (function () {
-    function AppComponent() {
-        this.recipes = RECIPES;
+    function AppComponent(recipeService) {
+        this.recipeService = recipeService;
     }
-    AppComponent.prototype.onSelect = function (recipe) { this.selectedRecipe = recipe; };
+    ;
+    AppComponent.prototype.onSelect = function (recipe) {
+        this.selectedRecipe = recipe;
+    };
+    ;
+    AppComponent.prototype.getRecipes = function () {
+        var _this = this;
+        this.recipeService.getRecipes().then(function (recipes) { return _this.recipes = recipes; });
+    };
+    AppComponent.prototype.ngOnInit = function () {
+        this.getRecipes();
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n    <h2>My Recipes</h2>\n    <ul>\n      <li *ngFor=\"let recipe of recipes\" (click)=\"onSelect(recipe)\">\n         {{recipe.name}}\n      </li>\n    </ul>\n    <my-recipe-detail [recipe]=\"selectedRecipe\"></my-recipe-detail>\n    "
+            template: "\n    <h2>My Recipes</h2>\n    <ul>\n      <li *ngFor=\"let recipe of recipes\" (click)=\"onSelect(recipe)\">\n         {{recipe.name}}\n      </li>\n    </ul>\n    <my-recipe-detail [recipe]=\"selectedRecipe\"></my-recipe-detail>\n  ",
+            providers: [recipe_service_1.RecipeService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [recipe_service_1.RecipeService])
     ], AppComponent);
     return AppComponent;
 }());

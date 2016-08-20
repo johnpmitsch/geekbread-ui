@@ -9,9 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var mock_recipes_1 = require('./mock-recipes');
 var RecipeService = (function () {
     function RecipeService() {
     }
+    RecipeService.prototype.getRecipes = function () {
+        return Promise.resolve(mock_recipes_1.RECIPES);
+    };
     RecipeService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [])
