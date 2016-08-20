@@ -20,7 +20,6 @@ var RecipeDetailComponent = (function () {
     RecipeDetailComponent = __decorate([
         core_1.Component({
             selector: 'my-recipe-detail',
-            recipe: recipe_1.Recipe,
             template: "\n    <div *ngIf=\"recipe\">\n      <h2>{{recipe.name}} details!</h2>\n      <div><label>id: </label>{{recipe.id}}</div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"recipe.name\" placeholder=\"name\"/>\n      </div>\n    </div>\n  "
         }), 
         __metadata('design:paramtypes', [])

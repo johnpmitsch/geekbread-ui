@@ -1,12 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Recipe } from './recipe';
-
-const RECIPES: Recipe[] = [
-  { id: 11, name: 'Rustic Sourdough' },
-  { id: 12, name: 'Whole Wheat' },
-  { id: 13, name: 'Pan loaf' }
-];
-
+import { RecipeService } from './recipe.service';
 
 @Component({
   selector: 'my-app',
@@ -18,11 +12,24 @@ const RECIPES: Recipe[] = [
       </li>
     </ul>
     <my-recipe-detail [recipe]="selectedRecipe"></my-recipe-detail>
-    `
+  `,
+  providers: [RecipeService]
 })
 
-export class AppComponent {
-  recipes = RECIPES;
+export class AppComponent implements OnInit {
+  recipes: Recipe[];
   selectedRecipe: Recipe;
-  onSelect(recipe: Recipe) { this.selectedRecipe = recipe; }
+  constructor(private recipeService: RecipeService) { };
+
+  onSelect(recipe: Recipe): void { 
+    this.selectedRecipe = recipe; 
+  }; 
+
+  getRecipes(): void {
+    this.recipeService.getRecipes().then(recipes => this.recipes = recipes);
+  }
+
+  ngOnInit(): void {
+    this.getRecipes();
+  }
 }

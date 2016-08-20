@@ -3,7 +3,6 @@ import { Recipe } from './recipe';
 
 @Component({
   selector: 'my-recipe-detail',
-  recipe: Recipe
   template: `
     <div *ngIf="recipe">
       <h2>{{recipe.name}} details!</h2>
