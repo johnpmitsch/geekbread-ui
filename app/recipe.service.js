@@ -9,16 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var mock_recipes_1 = require('./mock-recipes');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
 var RecipeService = (function () {
-    function RecipeService() {
+    function RecipeService(http) {
+        this.http = http;
+        this.recipesUrl = 'http://localhost:3000/v1/recipes';
     }
     RecipeService.prototype.getRecipes = function () {
-        return Promise.resolve(mock_recipes_1.RECIPES);
+        return this.http.get(this.recipesUrl)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    RecipeService.prototype.getRecipe = function (id) {
+        return this.getRecipes()
+            .then(function (recipes) { return recipes.find(function (recipe) { return recipe.id === id; }); });
     };
     RecipeService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], RecipeService);
     return RecipeService;
 }());
