@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
+var Observable_1 = require('rxjs/Observable');
 var RecipeService = (function () {
     function RecipeService(http) {
         this.http = http;
@@ -18,13 +19,33 @@ var RecipeService = (function () {
     }
     RecipeService.prototype.getRecipes = function () {
         return this.http.get(this.recipesUrl)
-            .toPromise()
-            .then(function (response) { return response.json().data; })
+            .map(this.extractData)
             .catch(this.handleError);
     };
+    //  getRecipes(): Promise<Recipe[]> {
+    //    return this.http.get(this.recipesUrl)
+    //               .toPromise()
+    //               .then(response => response.json().data as Recipe[])
+    //               .catch(this.handleError);
+    //  }
+    RecipeService.prototype.extractData = function (res) {
+        var body = res.json();
+        return body["recipes"] || {};
+    };
+    RecipeService.prototype.handleError = function (error) {
+        // In a real world app, we might use a remote logging infrastructure
+        // We'd also dig deeper into the error to get a better message
+        var errMsg = (error.message) ? error.message :
+            error.status ? error.status + " - " + error.statusText : 'Server error';
+        console.error(errMsg); // log to console instead
+        return Observable_1.Observable.throw(errMsg);
+    };
     RecipeService.prototype.getRecipe = function (id) {
-        return this.getRecipes()
-            .then(function (recipes) { return recipes.find(function (recipe) { return recipe.id === id; }); });
+        return "hi";
+        //    return this.http.get(this.recipesUrl + "/" + id)
+        //               .toPromise()
+        //               .then(response => response.json().data as Recipe[])
+        //               .catch(this.handleError);
     };
     RecipeService = __decorate([
         core_1.Injectable(), 

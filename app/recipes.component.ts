@@ -13,14 +13,17 @@ import { RecipeService } from './recipe.service';
 export class RecipeComponent implements OnInit {
   recipes: Recipe[];
   selectedRecipe: Recipe;
-  constructor(private recipeService: RecipeService) { };
+
+  constructor(
+    private router: Router,
+    private recipeService: RecipeService) { };
 
   onSelect(recipe: Recipe): void { 
     this.selectedRecipe = recipe; 
   }; 
 
   getRecipes(): void {
-    this.recipeService.getRecipes().then(recipes => this.recipes = recipes);
+    this.recipeService.getRecipes().subscribe(recipes => this.recipes = recipes);
   }
 
   ngOnInit(): void {

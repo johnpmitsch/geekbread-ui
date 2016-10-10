@@ -9,9 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var recipe_service_1 = require('./recipe.service');
 var RecipeComponent = (function () {
-    function RecipeComponent(recipeService) {
+    function RecipeComponent(router, recipeService) {
+        this.router = router;
         this.recipeService = recipeService;
     }
     ;
@@ -21,7 +23,7 @@ var RecipeComponent = (function () {
     ;
     RecipeComponent.prototype.getRecipes = function () {
         var _this = this;
-        this.recipeService.getRecipes().then(function (recipes) { return _this.recipes = recipes; });
+        this.recipeService.getRecipes().subscribe(function (recipes) { return _this.recipes = recipes; });
     };
     RecipeComponent.prototype.ngOnInit = function () {
         this.getRecipes();
@@ -32,7 +34,7 @@ var RecipeComponent = (function () {
             templateUrl: 'app/recipes.component.html',
             providers: [recipe_service_1.RecipeService]
         }), 
-        __metadata('design:paramtypes', [recipe_service_1.RecipeService])
+        __metadata('design:paramtypes', [router_1.Router, recipe_service_1.RecipeService])
     ], RecipeComponent);
     return RecipeComponent;
 }());

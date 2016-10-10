@@ -12,13 +12,11 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
-var angular2_in_memory_web_api_1 = require('angular2-in-memory-web-api');
-var in_memory_data_service_1 = require('./in-memory-data.service');
+var router_1 = require('@angular/router');
 var app_component_1 = require('./app.component');
 var recipes_component_1 = require('./recipes.component');
 var recipe_detail_component_1 = require('./recipe-detail.component');
 var recipe_service_1 = require('./recipe.service');
-var app_routing_1 = require('./app.routing');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -28,8 +26,20 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                angular2_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService),
-                app_routing_1.routing
+                router_1.RouterModule.forRoot([
+                    {
+                        path: 'recipes',
+                        component: recipes_component_1.RecipeComponent
+                    },
+                    {
+                        path: '',
+                        component: recipes_component_1.RecipeComponent
+                    },
+                    {
+                        path: 'detail/:id',
+                        component: recipe_detail_component_1.RecipeDetailComponent
+                    }
+                ])
             ],
             declarations: [
                 app_component_1.AppComponent,

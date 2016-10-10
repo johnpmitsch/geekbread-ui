@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import { Observable }     from 'rxjs/Observable';
 
 import { Recipe } from './recipe';
 
@@ -13,18 +14,19 @@ export class RecipeService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.http.get(this.recipesUrl)
-               .map(this.extractData)
-               .catch(this.handleError);
+                    .map(this.extractData)
+                    .catch(this.handleError)
   }
-
-  getRecipe(id: number): Promise<Recipe> {
-    return this.getRecipes()
-               .then(recipes => recipes.find(recipe => recipe.id === id));
-  }
+//  getRecipes(): Promise<Recipe[]> {
+//    return this.http.get(this.recipesUrl)
+//               .toPromise()
+//               .then(response => response.json().data as Recipe[])
+//               .catch(this.handleError);
+//  }
 
   private extractData(res: Response) {
-    let body = res.json();
-    return body.data || { };
+    let body = res.json();  
+    return body["recipes"] || { };
   }
 
   private handleError (error: any) {
@@ -35,4 +37,17 @@ export class RecipeService {
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }
+
+  getRecipe(id: number): any {
+    return  "hi"
+//    return this.http.get(this.recipesUrl + "/" + id)
+//               .toPromise()
+//               .then(response => response.json().data as Recipe[])
+//               .catch(this.handleError);
+  }
+
+//  private handleError(error: any): Promise<any> {
+//      console.error('An error occurred', error); // for demo purposes only
+//        return Promise.reject(error.message || error);
+//  }
 }

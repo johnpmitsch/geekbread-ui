@@ -18,11 +18,12 @@ export class RecipeDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.forEach((params: Params) => {
-      let id = +params['id'];
-      this.recipeService.getRecipe(id)
-        .then(recipe => this.recipe = recipe);
-    });
+    "hi"
+//    this.route.params.forEach((params: Params) => {
+//      let id = +params['id'];
+//      this.recipeService.getRecipe(1)
+//        .then(recipe => this.recipe = recipe);
+//    });
   }
 
   goBack(): void {
