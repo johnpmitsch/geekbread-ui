@@ -1,20 +1,33 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
+import { RecipeService } from './recipe.service';
 import { Recipe } from './recipe';
 
 @Component({
   selector: 'my-recipe-detail',
-  template: `
-    <div *ngIf="recipe">
-      <h2>{{recipe.name}} details!</h2>
-      <div><label>id: </label>{{recipe.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="recipe.name" placeholder="name"/>
-      </div>
-    </div>
-  `
+  templateUrl: 'app/recipe-detail.component.html' 
 })
-export class RecipeDetailComponent {
-  @Input()
-  recipe: Recipe
+
+export class RecipeDetailComponent implements OnInit {
+  @Input() recipe: Recipe
+
+  constructor(
+    private recipeService: RecipeService,
+    private route: ActivatedRoute) {
+  }
+
+  ngOnInit(): void {
+    this.route.params.forEach((params: Params) => {
+      let id = +params['id'];
+      if (id > 0) {
+        this.recipeService.getRecipe(id)
+          .subscribe(recipe => this.recipe = recipe);
+      }
+    });
+  }
+
+  goBack(): void {
+    window.history.back();
+  }
 }

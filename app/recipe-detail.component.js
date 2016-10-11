@@ -9,10 +9,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var recipe_service_1 = require('./recipe.service');
 var recipe_1 = require('./recipe');
 var RecipeDetailComponent = (function () {
-    function RecipeDetailComponent() {
+    function RecipeDetailComponent(recipeService, route) {
+        this.recipeService = recipeService;
+        this.route = route;
     }
+    RecipeDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.forEach(function (params) {
+            var id = +params['id'];
+            if (id > 0) {
+                _this.recipeService.getRecipe(id)
+                    .subscribe(function (recipe) { return _this.recipe = recipe; });
+            }
+        });
+    };
+    RecipeDetailComponent.prototype.goBack = function () {
+        window.history.back();
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', recipe_1.Recipe)
@@ -20,9 +37,9 @@ var RecipeDetailComponent = (function () {
     RecipeDetailComponent = __decorate([
         core_1.Component({
             selector: 'my-recipe-detail',
-            template: "\n    <div *ngIf=\"recipe\">\n      <h2>{{recipe.name}} details!</h2>\n      <div><label>id: </label>{{recipe.id}}</div>\n      <div>\n        <label>name: </label>\n        <input [(ngModel)]=\"recipe.name\" placeholder=\"name\"/>\n      </div>\n    </div>\n  "
+            templateUrl: 'app/recipe-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [recipe_service_1.RecipeService, router_1.ActivatedRoute])
     ], RecipeDetailComponent);
     return RecipeDetailComponent;
 }());

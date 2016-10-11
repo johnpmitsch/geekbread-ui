@@ -9,16 +9,65 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var mock_recipes_1 = require('./mock-recipes');
+var http_1 = require('@angular/http');
+require('rxjs/add/operator/toPromise');
+require('rxjs/add/observable/throw');
+var Observable_1 = require('rxjs/Observable');
 var RecipeService = (function () {
-    function RecipeService() {
+    function RecipeService(http) {
+        this.http = http;
+        this.recipesUrl = 'http://localhost:3000/v1/recipes';
     }
+    RecipeService.prototype.getAllRecipes = function () {
+        return this.http.get(this.recipesUrl)
+            .map(this.extractRecipesData);
+    };
     RecipeService.prototype.getRecipes = function () {
-        return Promise.resolve(mock_recipes_1.RECIPES);
+        return this.http.get(this.recipesUrl)
+            .map(this.extractRecipesData)
+            .catch(this.handleError);
+    };
+    RecipeService.prototype.getRecipe = function (id) {
+        return this.http.get(this.recipesUrl + "/" + id)
+            .map(this.extractRecipeData)
+            .catch(this.handleError);
+    };
+    RecipeService.prototype.addRecipe = function (name) {
+        var body = JSON.stringify({ name: name });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.recipesUrl, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    RecipeService.prototype.deleteRecipe = function (id) {
+        return this.http.delete(this.recipesUrl + "/" + id)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    RecipeService.prototype.extractData = function (res) {
+        var body = res.json();
+        return body || {};
+    };
+    RecipeService.prototype.extractRecipesData = function (res) {
+        var body = res.json();
+        return body["recipes"] || {};
+    };
+    RecipeService.prototype.extractRecipeData = function (res) {
+        var body = res.json();
+        return body["recipe"] || {};
+    };
+    RecipeService.prototype.handleError = function (error) {
+        if (error) {
+            var errMsg = (error.message) ? error.message :
+                error.status ? error.status + " - " + error.statusText : 'Server error';
+            console.error(errMsg); // log to console instead
+            return Observable_1.Observable.throw(errMsg);
+        }
     };
     RecipeService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [http_1.Http])
     ], RecipeService);
     return RecipeService;
 }());
