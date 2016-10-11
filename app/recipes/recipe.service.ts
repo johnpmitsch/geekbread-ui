@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Observable }     from 'rxjs/Observable';
 
-import { Recipe } from './recipe';
+import { Recipe } from './shared/recipe.model';
 
 @Injectable()
 export class RecipeService {

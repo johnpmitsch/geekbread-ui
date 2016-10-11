@@ -5,9 +5,9 @@ import { HttpModule }    from '@angular/http';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent }  from './app.component';
-import { RecipeComponent }  from './recipes.component';
-import { RecipeDetailComponent } from './recipe-detail.component';
-import { RecipeService } from './recipe.service';
+import { RecipeComponent }  from './recipes/recipes.component';
+import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
+import { RecipeService } from './recipes/recipe.service';
 
 @NgModule({
   imports: [ 

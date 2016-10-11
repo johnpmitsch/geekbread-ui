@@ -10,8 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var recipe_service_1 = require('./recipe.service');
-var recipe_1 = require('./recipe');
+var recipe_service_1 = require('../recipe.service');
+var recipe_model_1 = require('../shared/recipe.model');
 var RecipeDetailComponent = (function () {
     function RecipeDetailComponent(recipeService, route) {
         this.recipeService = recipeService;
@@ -32,12 +32,12 @@ var RecipeDetailComponent = (function () {
     };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', recipe_1.Recipe)
+        __metadata('design:type', recipe_model_1.Recipe)
     ], RecipeDetailComponent.prototype, "recipe", void 0);
     RecipeDetailComponent = __decorate([
         core_1.Component({
             selector: 'my-recipe-detail',
-            templateUrl: 'app/recipe-detail.component.html'
+            templateUrl: 'app/recipes/recipe-detail/recipe-detail.component.html'
         }), 
         __metadata('design:paramtypes', [recipe_service_1.RecipeService, router_1.ActivatedRoute])
     ], RecipeDetailComponent);

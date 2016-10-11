@@ -3,7 +3,7 @@
 <table class="table">
   <tbody>
   <tr *ngFor="let recipe of recipes" >
-    <td (click)="onSelect(recipe)">{{recipe.name}}</td>
+    <td (click)="onSelect(recipe)"><a>{{recipe.name}}</a></td>
     <td>
       <button (click)="deleteRecipe(recipe)" class="btn btn-sm btn-warning">Delete</button>
     </td>
