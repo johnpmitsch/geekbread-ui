@@ -19,10 +19,6 @@ var RecipeService = (function () {
         this.http = http;
         this.recipesUrl = 'http://localhost:3000/v1/recipes';
     }
-    RecipeService.prototype.getAllRecipes = function () {
-        return this.http.get(this.recipesUrl)
-            .map(this.extractRecipesData);
-    };
     RecipeService.prototype.getRecipes = function () {
         return this.http.get(this.recipesUrl)
             .map(this.extractRecipesData)

@@ -36,14 +36,14 @@ export class RecipeComponent implements OnInit {
   addRecipe(name: string) {
     if (!name) { return; } 
     this.recipeService.addRecipe(name)
-                      .subscribe(recipe  => this.getRecipes(),
-                                 error   => this.errorMessage = <any>error);
+                      .subscribe(success  => this.getRecipes(),
+                                 error    => this.errorMessage = <any>error);
     this.getRecipes();
   }
 
   deleteRecipe(recipe: Recipe): void {
     this.recipeService.deleteRecipe(recipe.id)
-                      .subscribe(recipe => this.getRecipes(),
+                      .subscribe(sucess => this.getRecipes(),
                                  error  => this.errorMessage = <any>error);
   }
 }

@@ -22,10 +22,14 @@ var RecipeDetailComponent = (function () {
         this.route.params.forEach(function (params) {
             var id = +params['id'];
             if (id > 0) {
-                _this.recipeService.getRecipe(id)
-                    .subscribe(function (recipe) { return _this.recipe = recipe; });
+                _this.getRecipe(id);
             }
         });
+    };
+    RecipeDetailComponent.prototype.getRecipe = function (id) {
+        var _this = this;
+        this.recipeService.getRecipe(id)
+            .subscribe(function (recipe) { return _this.recipe = recipe; });
     };
     RecipeDetailComponent.prototype.goBack = function () {
         window.history.back();

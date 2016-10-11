@@ -17,6 +17,8 @@ var app_component_1 = require('./app.component');
 var recipes_component_1 = require('./recipes/recipes.component');
 var recipe_detail_component_1 = require('./recipes/recipe-detail/recipe-detail.component');
 var recipe_service_1 = require('./recipes/recipe.service');
+var ingredients_component_1 = require('./ingredients/ingredients.component');
+var ingredient_service_1 = require('./ingredients/ingredient.service');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -44,10 +46,12 @@ var AppModule = (function () {
             declarations: [
                 app_component_1.AppComponent,
                 recipes_component_1.RecipeComponent,
-                recipe_detail_component_1.RecipeDetailComponent
+                recipe_detail_component_1.RecipeDetailComponent,
+                ingredients_component_1.IngredientComponent
             ],
             providers: [
-                recipe_service_1.RecipeService
+                recipe_service_1.RecipeService,
+                ingredient_service_1.IngredientService
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 
