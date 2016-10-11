@@ -21,10 +21,14 @@ export class RecipeDetailComponent implements OnInit {
     this.route.params.forEach((params: Params) => {
       let id = +params['id'];
       if (id > 0) {
-        this.recipeService.getRecipe(id)
-          .subscribe(recipe => this.recipe = recipe);
+        this.getRecipe(id);
       }
     });
+  }
+
+  getRecipe(id: number): void {
+    this.recipeService.getRecipe(id)
+          .subscribe(recipe => this.recipe = recipe);
   }
 
   goBack(): void {

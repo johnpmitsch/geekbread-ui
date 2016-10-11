@@ -8,6 +8,8 @@ import { AppComponent }  from './app.component';
 import { RecipeComponent }  from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeService } from './recipes/recipe.service';
+import { IngredientComponent } from './ingredients/ingredients.component';
+import { IngredientService } from './ingredients/ingredient.service';
 
 @NgModule({
   imports: [ 
@@ -32,10 +34,12 @@ import { RecipeService } from './recipes/recipe.service';
   declarations: [ 
     AppComponent,
     RecipeComponent,
-    RecipeDetailComponent
+    RecipeDetailComponent,
+    IngredientComponent
   ],
   providers: [
-    RecipeService
+    RecipeService,
+    IngredientService
   ],
   bootstrap:    [ AppComponent ]
 })

@@ -14,11 +14,6 @@ export class RecipeService {
 
   constructor(private http: Http) { }
 
-  getAllRecipes(): Observable<Recipe[]> {
-    return this.http.get(this.recipesUrl)
-                    .map(this.extractRecipesData)
-  }
-
   getRecipes(): Observable<Recipe[]> {
     return this.http.get(this.recipesUrl)
                     .map(this.extractRecipesData)

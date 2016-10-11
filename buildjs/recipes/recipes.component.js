@@ -36,13 +36,13 @@ var RecipeComponent = (function () {
             return;
         }
         this.recipeService.addRecipe(name)
-            .subscribe(function (recipe) { return _this.recipes = _this.getRecipes(); }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (success) { return _this.getRecipes(); }, function (error) { return _this.errorMessage = error; });
         this.getRecipes();
     };
     RecipeComponent.prototype.deleteRecipe = function (recipe) {
         var _this = this;
         this.recipeService.deleteRecipe(recipe.id)
-            .subscribe(function (recipe) { return _this.recipes = _this.getRecipes(); }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (sucess) { return _this.getRecipes(); }, function (error) { return _this.errorMessage = error; });
     };
     RecipeComponent = __decorate([
         core_1.Component({

@@ -1,0 +1,18 @@
+<div *ngIf="ingredients">
+  Total Dough Weight(g): <input #totalWeight (keyup.enter)="submitTotalDoughWeight(totalWeight.value)" placeholder="Enter weight"/>
+
+  <table class="table">
+    <thead>
+      <td>Ingredient</td>
+      <td>Percentage</td>
+      <td>Amount</td>
+    </thead>
+    <tbody>
+    <tr *ngFor="let ingredient of ingredients" >
+      <td>{{ ingredient.name }}</td>
+      <td>{{ ingredient.percentage }}</td>
+      <td>{{ (flourWeight * ingredient.percentage)/100 | number:'1.0-0' }}</td>
+    </tr>
+    </tbody>
+  </table>
+</div> 
