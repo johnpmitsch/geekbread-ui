@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Recipe } from './recipe';
+import { Recipe } from './shared/recipe.model';
 import { RecipeService } from './recipe.service';
 
 @Component({
@@ -36,14 +36,14 @@ export class RecipeComponent implements OnInit {
   addRecipe(name: string) {
     if (!name) { return; } 
     this.recipeService.addRecipe(name)
-                      .subscribe(recipe  => this.recipes = this.getRecipes(),
+                      .subscribe(recipe  => this.getRecipes(),
                                  error   => this.errorMessage = <any>error);
     this.getRecipes();
   }
 
   deleteRecipe(recipe: Recipe): void {
     this.recipeService.deleteRecipe(recipe.id)
-                      .subscribe(recipe => this.recipes = this.getRecipes(),
+                      .subscribe(recipe => this.getRecipes(),
                                  error  => this.errorMessage = <any>error);
   }
 }
