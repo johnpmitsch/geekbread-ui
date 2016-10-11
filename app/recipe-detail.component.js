@@ -18,12 +18,14 @@ var RecipeDetailComponent = (function () {
         this.route = route;
     }
     RecipeDetailComponent.prototype.ngOnInit = function () {
-        "hi";
-        //    this.route.params.forEach((params: Params) => {
-        //      let id = +params['id'];
-        //      this.recipeService.getRecipe(1)
-        //        .then(recipe => this.recipe = recipe);
-        //    });
+        var _this = this;
+        this.route.params.forEach(function (params) {
+            var id = +params['id'];
+            if (id > 0) {
+                _this.recipeService.getRecipe(id)
+                    .subscribe(function (recipe) { return _this.recipe = recipe; });
+            }
+        });
     };
     RecipeDetailComponent.prototype.goBack = function () {
         window.history.back();

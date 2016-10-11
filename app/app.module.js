@@ -36,7 +36,7 @@ var AppModule = (function () {
                         component: recipes_component_1.RecipeComponent
                     },
                     {
-                        path: 'detail/:id',
+                        path: 'recipe/:id',
                         component: recipe_detail_component_1.RecipeDetailComponent
                     }
                 ])

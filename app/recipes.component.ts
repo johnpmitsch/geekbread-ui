@@ -11,22 +11,39 @@ import { RecipeService } from './recipe.service';
 })
 
 export class RecipeComponent implements OnInit {
+  errorMessage: string;
   recipes: Recipe[];
   selectedRecipe: Recipe;
+  mode = 'Observable';
 
   constructor(
     private router: Router,
     private recipeService: RecipeService) { };
 
+  ngOnInit(): void {
+    this.getRecipes();
+  }
+
   onSelect(recipe: Recipe): void { 
     this.selectedRecipe = recipe; 
+    this.router.navigate(['/recipe', this.selectedRecipe.id]);
   }; 
 
   getRecipes(): void {
     this.recipeService.getRecipes().subscribe(recipes => this.recipes = recipes);
   }
 
-  ngOnInit(): void {
+  addRecipe(name: string) {
+    if (!name) { return; } 
+    this.recipeService.addRecipe(name)
+                      .subscribe(recipe  => this.recipes = this.getRecipes(),
+                                 error   => this.errorMessage = <any>error);
     this.getRecipes();
+  }
+
+  deleteRecipe(recipe: Recipe): void {
+    this.recipeService.deleteRecipe(recipe.id)
+                      .subscribe(recipe => this.recipes = this.getRecipes(),
+                                 error  => this.errorMessage = <any>error);
   }
 }

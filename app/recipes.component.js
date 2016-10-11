@@ -15,18 +15,34 @@ var RecipeComponent = (function () {
     function RecipeComponent(router, recipeService) {
         this.router = router;
         this.recipeService = recipeService;
+        this.mode = 'Observable';
     }
     ;
+    RecipeComponent.prototype.ngOnInit = function () {
+        this.getRecipes();
+    };
     RecipeComponent.prototype.onSelect = function (recipe) {
         this.selectedRecipe = recipe;
+        this.router.navigate(['/recipe', this.selectedRecipe.id]);
     };
     ;
     RecipeComponent.prototype.getRecipes = function () {
         var _this = this;
         this.recipeService.getRecipes().subscribe(function (recipes) { return _this.recipes = recipes; });
     };
-    RecipeComponent.prototype.ngOnInit = function () {
+    RecipeComponent.prototype.addRecipe = function (name) {
+        var _this = this;
+        if (!name) {
+            return;
+        }
+        this.recipeService.addRecipe(name)
+            .subscribe(function (recipe) { return _this.recipes = _this.getRecipes(); }, function (error) { return _this.errorMessage = error; });
         this.getRecipes();
+    };
+    RecipeComponent.prototype.deleteRecipe = function (recipe) {
+        var _this = this;
+        this.recipeService.deleteRecipe(recipe.id)
+            .subscribe(function (recipe) { return _this.recipes = _this.getRecipes(); }, function (error) { return _this.errorMessage = error; });
     };
     RecipeComponent = __decorate([
         core_1.Component({

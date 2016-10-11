@@ -1,9 +1,17 @@
 <h2>My Recipes</h2>
-<ul>
-  <li *ngFor="let recipe of recipes" (click)="onSelect(recipe)">
-     {{recipe.name}}
-  </li>
-</ul>
-<!--<my-recipe-detail [recipe]="selectedRecipe"></my-recipe-detail>
-<button (click)="goBack()">Back</button>-->
+<div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+<table class="table">
+  <tbody>
+  <tr *ngFor="let recipe of recipes" >
+    <td (click)="onSelect(recipe)">{{recipe.name}}</td>
+    <td>
+      <button (click)="deleteRecipe(recipe)" class="btn btn-sm btn-warning">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
+<my-recipe-detail [recipe]="selectedRecipe"></my-recipe-detail>
+New recipe name:
+<input #newRecipeName />
+<button (click)="addRecipe(newRecipeName.value); newRecipeName.value=''" class="btn btn-default btn-sm">Add</button>

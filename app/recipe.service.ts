@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/observable/throw';
 import { Observable }     from 'rxjs/Observable';
 
 import { Recipe } from './recipe';
@@ -12,42 +13,59 @@ export class RecipeService {
 
   constructor(private http: Http) { }
 
+  getAllRecipes(): Observable<Recipe[]> {
+    return this.http.get(this.recipesUrl)
+                    .map(this.extractRecipesData)
+  }
+
   getRecipes(): Observable<Recipe[]> {
     return this.http.get(this.recipesUrl)
-                    .map(this.extractData)
+                    .map(this.extractRecipesData)
                     .catch(this.handleError)
   }
-//  getRecipes(): Promise<Recipe[]> {
-//    return this.http.get(this.recipesUrl)
-//               .toPromise()
-//               .then(response => response.json().data as Recipe[])
-//               .catch(this.handleError);
-//  }
+
+  getRecipe(id: number): Observable<Recipe> {
+    return this.http.get(this.recipesUrl + "/" + id)
+                    .map(this.extractRecipeData)
+                    .catch(this.handleError)
+  }
+
+  addRecipe(name: string): Observable<Recipe> {
+    let body = JSON.stringify({ name });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.recipesUrl, body, options)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
+
+  deleteRecipe(id: number): Observable<Recipe> {
+    return this.http.delete(this.recipesUrl + "/" + id)
+                    .map(this.extractData)
+                    .catch(this.handleError);
+  }
 
   private extractData(res: Response) {
+    let body = res.json();  
+    return body || { };
+  }
+
+  private extractRecipesData(res: Response) {
     let body = res.json();  
     return body["recipes"] || { };
   }
 
+  private extractRecipeData(res: Response) {
+    let body = res.json();  
+    return body["recipe"] || { };
+  }
+
   private handleError (error: any) {
-    // In a real world app, we might use a remote logging infrastructure
-    // We'd also dig deeper into the error to get a better message
-    let errMsg = (error.message) ? error.message :
-      error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-    console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
+    if (error) {
+      let errMsg = (error.message) ? error.message :
+        error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+      console.error(errMsg); // log to console instead
+      return Observable.throw(errMsg);
+    }
   }
-
-  getRecipe(id: number): any {
-    return  "hi"
-//    return this.http.get(this.recipesUrl + "/" + id)
-//               .toPromise()
-//               .then(response => response.json().data as Recipe[])
-//               .catch(this.handleError);
-  }
-
-//  private handleError(error: any): Promise<any> {
-//      console.error('An error occurred', error); // for demo purposes only
-//        return Promise.reject(error.message || error);
-//  }
 }

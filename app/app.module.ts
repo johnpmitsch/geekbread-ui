@@ -24,7 +24,7 @@ import { RecipeService } from './recipe.service';
         component: RecipeComponent
       },
       {
-        path: 'detail/:id',
+        path: 'recipe/:id',
         component: RecipeDetailComponent
       }
     ])
