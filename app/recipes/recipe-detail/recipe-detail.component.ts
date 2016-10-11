@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { RecipeService } from './recipe.service';
-import { Recipe } from './recipe';
+import { RecipeService } from '../recipe.service';
+import { Recipe } from '../shared/recipe.model';
 
 @Component({
   selector: 'my-recipe-detail',
-  templateUrl: 'app/recipe-detail.component.html' 
+  templateUrl: 'app/recipes/recipe-detail/recipe-detail.component.html' 
 })
 
 export class RecipeDetailComponent implements OnInit {

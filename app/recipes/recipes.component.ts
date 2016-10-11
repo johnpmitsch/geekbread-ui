@@ -6,7 +6,7 @@ import { RecipeService } from './recipe.service';
 
 @Component({
   selector: 'my-recipes',
-  templateUrl: 'app/recipes.component.html',
+  templateUrl: 'app/recipes/recipes.component.html',
   providers: [RecipeService]
 })
 

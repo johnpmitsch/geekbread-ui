@@ -14,9 +14,9 @@ var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 var router_1 = require('@angular/router');
 var app_component_1 = require('./app.component');
-var recipes_component_1 = require('./recipes.component');
-var recipe_detail_component_1 = require('./recipe-detail.component');
-var recipe_service_1 = require('./recipe.service');
+var recipes_component_1 = require('./recipes/recipes.component');
+var recipe_detail_component_1 = require('./recipes/recipe-detail/recipe-detail.component');
+var recipe_service_1 = require('./recipes/recipe.service');
 var AppModule = (function () {
     function AppModule() {
     }

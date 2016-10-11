@@ -5,4 +5,4 @@ var Recipe = (function () {
     return Recipe;
 }());
 exports.Recipe = Recipe;
-//# sourceMappingURL=recipe.js.map
+//# sourceMappingURL=recipe.model.js.map
