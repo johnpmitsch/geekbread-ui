@@ -1,18 +1,27 @@
 <div *ngIf="ingredients">
-  Total Dough Weight(g): <input #totalWeight (keyup.enter)="submitTotalDoughWeight(totalWeight.value)" placeholder="Enter weight"/>
+  <div class='well well-sm'>
+    Total Dough Weight(grams): <input #totalWeight (keyup)="submitTotalDoughWeight(totalWeight.value)" placeholder="Enter weight"/>
+  <button (click)= "submitTotalDoughWeight(totalWeight.value)" class="btn btn-primary btn-sm">Calculate</button>
+  </div>
 
-  <table class="table">
+  <table class="table table-striped table-responsive">
     <thead>
-      <td>Ingredient</td>
-      <td>Percentage</td>
-      <td>Amount</td>
+      <td><b>Ingredient</b></td>
+      <td><b>Percentage</b></td>
+      <td><b>Amount(grams)</b></td>
+      <td><b>Action</b></td>
     </thead>
     <tbody>
     <tr *ngFor="let ingredient of ingredients" >
       <td>{{ ingredient.name }}</td>
       <td>{{ ingredient.percentage }}</td>
-      <td>{{ (flourWeight * ingredient.percentage)/100 | number:'1.0-0' }}</td>
+      <td>{{ ingredient.amount | number:'1.0-0' }}</td>
+      <td><button (click)="deleteIngredient(ingredient.id)" class="btn btn-danger btn-sm">Delete</button>
     </tr>
     </tbody>
   </table>
+
+  <div class="well well-sm">
+    <ingredient-form [recipe]="recipe" (notify)="updateIngredients($event)"></ingredient-form>
+  </div>
 </div> 

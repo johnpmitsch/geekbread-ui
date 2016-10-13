@@ -10,7 +10,9 @@ import { Recipe } from './shared/recipe.model';
 
 @Injectable()
 export class RecipeService {
-  private recipesUrl = 'http://localhost:3000/v1/recipes';
+  private baseUrl = 'http://localhost:3000/v1/';
+  private recipesUrl = this.baseUrl + 'recipes';
+  private ingredientsUrl = this.baseUrl + 'ingredients';
 
   constructor(private http: Http) { }
 
@@ -33,6 +35,16 @@ export class RecipeService {
     return this.http.post(this.recipesUrl, body, options)
                     .map(this.extractData)
                     .catch(this.handleError);
+  }
+
+
+  addIngredientToRecipe(recipeId: number, name: string, percentage: number) {
+    let body = JSON.stringify({ name: name, percentage: percentage, recipe_id: recipeId });
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.ingredientsUrl, body, options)
+                         .map(this.extractData)
+                         .catch(this.handleError);
   }
 
   deleteRecipe(id: number): Observable<Recipe> {

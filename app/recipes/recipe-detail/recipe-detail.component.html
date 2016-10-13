@@ -1,5 +1,4 @@
 <div *ngIf="recipe">
   <h2>{{recipe.name}}</h2>
-  <button (click)="goBack()" class="btn btn-small btn-default">Back</button>
   <recipe-ingredients [recipe]="recipe"></recipe-ingredients>
 </div>

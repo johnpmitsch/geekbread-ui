@@ -7,9 +7,11 @@
   {{errorMessage}}
 </div>
 
-New recipe name:
-<input #newRecipeName (keyup.enter)="addRecipe(newRecipeName.value); newRecipeName.value=''" />
-<button (click)="addRecipe(newRecipeName.value); newRecipeName.value=''" class="btn btn-default btn-sm">Add</button>
+<div class="well well-sm">
+  New recipe name:
+  <input #newRecipeName (keyup.enter)="addRecipe(newRecipeName.value); newRecipeName.value=''" />
+  <button (click)="addRecipe(newRecipeName.value); newRecipeName.value=''" class="btn btn-default btn-sm">Add</button>
+</div>
 
 <table class="table">
   <tbody>

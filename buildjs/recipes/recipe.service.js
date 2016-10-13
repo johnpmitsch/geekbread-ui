@@ -17,7 +17,9 @@ var Observable_1 = require('rxjs/Observable');
 var RecipeService = (function () {
     function RecipeService(http) {
         this.http = http;
-        this.recipesUrl = 'http://localhost:3000/v1/recipes';
+        this.baseUrl = 'http://localhost:3000/v1/';
+        this.recipesUrl = this.baseUrl + 'recipes';
+        this.ingredientsUrl = this.baseUrl + 'ingredients';
     }
     RecipeService.prototype.getRecipes = function () {
         return this.http.get(this.recipesUrl)
@@ -34,6 +36,14 @@ var RecipeService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.recipesUrl, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    RecipeService.prototype.addIngredientToRecipe = function (recipeId, name, percentage) {
+        var body = JSON.stringify({ name: name, percentage: percentage, recipe_id: recipeId });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.ingredientsUrl, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
