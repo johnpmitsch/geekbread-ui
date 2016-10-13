@@ -10,6 +10,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeService } from './recipes/recipe.service';
 import { IngredientComponent } from './ingredients/ingredients.component';
 import { IngredientService } from './ingredients/ingredient.service';
+import { IngredientFormComponent } from './ingredients/ingredient-form.component';
 
 @NgModule({
   imports: [ 
@@ -35,7 +36,8 @@ import { IngredientService } from './ingredients/ingredient.service';
     AppComponent,
     RecipeComponent,
     RecipeDetailComponent,
-    IngredientComponent
+    IngredientComponent,
+    IngredientFormComponent 
   ],
   providers: [
     RecipeService,

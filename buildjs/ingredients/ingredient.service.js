@@ -17,14 +17,26 @@ var Observable_1 = require('rxjs/Observable');
 var IngredientService = (function () {
     function IngredientService(http) {
         this.http = http;
-        this.recipesUrl = 'http://localhost:3000/v1/recipes/';
+        this.baseUrl = 'http://localhost:3000/v1/';
+        this.recipesUrl = this.baseUrl + 'recipes';
+        this.ingredientsUrl = this.baseUrl + 'ingredients';
     }
     IngredientService.prototype.getIngredients = function (recipeId) {
-        return this.http.get(this.recipesUrl + recipeId + "/ingredients")
+        return this.http.get(this.recipesUrl + "/" + recipeId + "/ingredients")
+            .map(this.extractIngredientData)
+            .catch(this.handleError);
+    };
+    IngredientService.prototype.deleteIngredient = function (ingredientId) {
+        return this.http.delete(this.ingredientsUrl + "/" + ingredientId)
             .map(this.extractData)
             .catch(this.handleError);
     };
     IngredientService.prototype.extractData = function (res) {
+        console.log(res);
+        var body = res.json();
+        return body || {};
+    };
+    IngredientService.prototype.extractIngredientData = function (res) {
         var body = res.json();
         return body["ingredients"] || {};
     };

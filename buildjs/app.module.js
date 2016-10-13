@@ -19,6 +19,7 @@ var recipe_detail_component_1 = require('./recipes/recipe-detail/recipe-detail.c
 var recipe_service_1 = require('./recipes/recipe.service');
 var ingredients_component_1 = require('./ingredients/ingredients.component');
 var ingredient_service_1 = require('./ingredients/ingredient.service');
+var ingredient_form_component_1 = require('./ingredients/ingredient-form.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -47,7 +48,8 @@ var AppModule = (function () {
                 app_component_1.AppComponent,
                 recipes_component_1.RecipeComponent,
                 recipe_detail_component_1.RecipeDetailComponent,
-                ingredients_component_1.IngredientComponent
+                ingredients_component_1.IngredientComponent,
+                ingredient_form_component_1.IngredientFormComponent
             ],
             providers: [
                 recipe_service_1.RecipeService,

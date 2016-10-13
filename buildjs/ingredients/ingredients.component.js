@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ingredient_service_1 = require('./ingredient.service');
+var ingredient_form_component_1 = require('./ingredient-form.component');
 var recipe_model_1 = require('../recipes/shared/recipe.model');
 var IngredientComponent = (function () {
     function IngredientComponent(ingredientService) {
@@ -32,13 +33,28 @@ var IngredientComponent = (function () {
         var totalPercentage = this.getTotalPercentage();
         this.flourWeight = (this.totalDoughWeight / totalPercentage) * 100;
     };
+    IngredientComponent.prototype.updateIngredientAmounts = function () {
+        for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
+            var ingredient = _a[_i];
+            ingredient.amount = (this.flourWeight * ingredient.percentage) / 100;
+        }
+    };
     IngredientComponent.prototype.submitTotalDoughWeight = function (doughWeight) {
         this.totalDoughWeight = doughWeight;
         this.getFlourWeight();
+        this.updateIngredientAmounts();
     };
     IngredientComponent.prototype.getIngredients = function () {
         var _this = this;
         this.ingredientService.getIngredients(this.recipe.id).subscribe(function (ingredients) { return _this.ingredients = ingredients; });
+    };
+    IngredientComponent.prototype.deleteIngredient = function (ingredientId) {
+        var _this = this;
+        this.ingredientService.deleteIngredient(ingredientId)
+            .subscribe(function (success) { return _this.getIngredients(); }, function (error) { return _this.errorMessage = error; });
+    };
+    IngredientComponent.prototype.updateIngredients = function (evt) {
+        this.getIngredients();
     };
     __decorate([
         core_1.Input(), 
@@ -48,7 +64,8 @@ var IngredientComponent = (function () {
         core_1.Component({
             selector: 'recipe-ingredients',
             templateUrl: 'app/ingredients/ingredients.component.html',
-            providers: [ingredient_service_1.IngredientService]
+            providers: [ingredient_service_1.IngredientService],
+            directives: [ingredient_form_component_1.IngredientFormComponent]
         }), 
         __metadata('design:paramtypes', [ingredient_service_1.IngredientService])
     ], IngredientComponent);

@@ -3,13 +3,15 @@ import { ActivatedRoute, Params } from '@angular/router';
 
 import { Ingredient } from './shared/ingredient.model';
 import { IngredientService } from './ingredient.service';
+import { IngredientFormComponent } from './ingredient-form.component';
 
 import { Recipe } from '../recipes/shared/recipe.model';
 
 @Component({
   selector: 'recipe-ingredients',
   templateUrl: 'app/ingredients/ingredients.component.html',
-  providers: [IngredientService]
+  providers: [IngredientService],
+  directives: [IngredientFormComponent]
 })
 
 export class IngredientComponent implements OnInit {
@@ -42,13 +44,30 @@ export class IngredientComponent implements OnInit {
     this.flourWeight = (this.totalDoughWeight / totalPercentage) * 100;
   }
 
+  updateIngredientAmounts(): void {
+    for (var ingredient of this.ingredients) {
+      ingredient.amount = (this.flourWeight * ingredient.percentage)/100
+    }
+  }
+ 
   submitTotalDoughWeight(doughWeight: number): void {
     this.totalDoughWeight = doughWeight;
-    this.getFlourWeight()
+    this.getFlourWeight();
+    this.updateIngredientAmounts();
   }
 
   getIngredients(): void {
     this.ingredientService.getIngredients(this.recipe.id).subscribe(ingredients => this.ingredients = ingredients);
+  }
+
+  deleteIngredient(ingredientId): void {
+    this.ingredientService.deleteIngredient(ingredientId)
+                          .subscribe(success => this.getIngredients(),
+                                     error   => this.errorMessage = <any>error);
+  }
+
+  updateIngredients(evt): void {
+    this.getIngredients();
   }
 }
 
