@@ -66,6 +66,12 @@ export class IngredientComponent implements OnInit {
                                      error   => this.errorMessage = <any>error);
   }
 
+  updateIngredient(ingredientId, name, percentage): void {
+    this.ingredientService.updateIngredient(ingredientId, name, percentage)
+                          .subscribe(success => this.getIngredients(),
+                                     error   => this.errorMessage = <any>error);
+  }
+
   updateIngredients(evt): void {
     this.getIngredients();
   }

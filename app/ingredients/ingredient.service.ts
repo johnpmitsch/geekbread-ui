@@ -29,14 +29,19 @@ export class IngredientService {
                     .catch(this.handleError)
   }
 
+  updateIngredient(ingredientId: number, name: string, percentage: number): Observable<Ingredient[]> {
+    let body = JSON.stringify({ name: name, percentage: percentage});
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.ingredientsUrl + "/" + ingredientId, body, options)
+                    .map(this.extractData)
+                    .catch(this.handleError)
+  }
+
+
   private extractData(res: Response) {
     let body = res.json();  
     return body || { };
-  }
-
-  private extractIngredientData(res: Response) {
-    let body = res.json();  
-    return body["ingredients"] || { };
   }
 
   private handleError (error: any) {
