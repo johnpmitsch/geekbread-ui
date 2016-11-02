@@ -32,13 +32,17 @@ var IngredientService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    IngredientService.prototype.updateIngredient = function (ingredientId, name, percentage) {
+        var body = JSON.stringify({ name: name, percentage: percentage });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.put(this.ingredientsUrl + "/" + ingredientId, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     IngredientService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};
-    };
-    IngredientService.prototype.extractIngredientData = function (res) {
-        var body = res.json();
-        return body["ingredients"] || {};
     };
     IngredientService.prototype.handleError = function (error) {
         if (error) {

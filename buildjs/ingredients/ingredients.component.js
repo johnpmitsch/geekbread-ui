@@ -53,6 +53,11 @@ var IngredientComponent = (function () {
         this.ingredientService.deleteIngredient(ingredientId)
             .subscribe(function (success) { return _this.getIngredients(); }, function (error) { return _this.errorMessage = error; });
     };
+    IngredientComponent.prototype.updateIngredient = function (ingredientId, name, percentage) {
+        var _this = this;
+        this.ingredientService.updateIngredient(ingredientId, name, percentage)
+            .subscribe(function (success) { return _this.getIngredients(); }, function (error) { return _this.errorMessage = error; });
+    };
     IngredientComponent.prototype.updateIngredients = function (evt) {
         this.getIngredients();
     };
