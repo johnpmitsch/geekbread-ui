@@ -10,8 +10,7 @@ import { Recipe } from '../recipes/shared/recipe.model';
 @Component({
   selector: 'recipe-ingredients',
   templateUrl: 'app/ingredients/ingredients.component.html',
-  providers: [IngredientService],
-  directives: [IngredientFormComponent]
+  providers: [IngredientService]
 })
 
 export class IngredientComponent implements OnInit {
