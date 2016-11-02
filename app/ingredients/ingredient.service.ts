@@ -3,6 +3,7 @@ import { Headers, Http, Response, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { Observable }     from 'rxjs/Observable';
 
@@ -18,7 +19,7 @@ export class IngredientService {
 
   getIngredients(recipeId: number): Observable<Ingredient[]> {
     return this.http.get(this.recipesUrl + "/" + recipeId + "/ingredients")
-                    .map(this.extractIngredientData)
+                    .map(this.extractData)
                     .catch(this.handleError)
   }
 
@@ -29,7 +30,6 @@ export class IngredientService {
   }
 
   private extractData(res: Response) {
-    console.log(res);
     let body = res.json();  
     return body || { };
   }

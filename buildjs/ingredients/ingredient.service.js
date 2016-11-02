@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
 require('rxjs/add/operator/catch');
+require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var Observable_1 = require('rxjs/Observable');
 var IngredientService = (function () {
@@ -23,7 +24,7 @@ var IngredientService = (function () {
     }
     IngredientService.prototype.getIngredients = function (recipeId) {
         return this.http.get(this.recipesUrl + "/" + recipeId + "/ingredients")
-            .map(this.extractIngredientData)
+            .map(this.extractData)
             .catch(this.handleError);
     };
     IngredientService.prototype.deleteIngredient = function (ingredientId) {
@@ -32,7 +33,6 @@ var IngredientService = (function () {
             .catch(this.handleError);
     };
     IngredientService.prototype.extractData = function (res) {
-        console.log(res);
         var body = res.json();
         return body || {};
     };

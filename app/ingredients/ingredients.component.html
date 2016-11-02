@@ -14,7 +14,7 @@
     <tbody>
     <tr *ngFor="let ingredient of ingredients" >
       <td>{{ ingredient.name }}</td>
-      <td>{{ ingredient.percentage }}</td>
+      <td>{{ ingredient.percentage }}%</td>
       <td>{{ ingredient.amount | number:'1.0-0' }}</td>
       <td><button (click)="deleteIngredient(ingredient.id)" class="btn btn-danger btn-sm">Delete</button>
     </tr>

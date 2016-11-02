@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
 require('rxjs/add/operator/catch');
+require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var Observable_1 = require('rxjs/Observable');
 var RecipeService = (function () {
@@ -23,12 +24,12 @@ var RecipeService = (function () {
     }
     RecipeService.prototype.getRecipes = function () {
         return this.http.get(this.recipesUrl)
-            .map(this.extractRecipesData)
+            .map(this.extractData)
             .catch(this.handleError);
     };
     RecipeService.prototype.getRecipe = function (id) {
         return this.http.get(this.recipesUrl + "/" + id)
-            .map(this.extractRecipeData)
+            .map(this.extractData)
             .catch(this.handleError);
     };
     RecipeService.prototype.addRecipe = function (name) {
@@ -54,15 +55,8 @@ var RecipeService = (function () {
     };
     RecipeService.prototype.extractData = function (res) {
         var body = res.json();
+        console.log(res);
         return body || {};
-    };
-    RecipeService.prototype.extractRecipesData = function (res) {
-        var body = res.json();
-        return body["recipes"] || {};
-    };
-    RecipeService.prototype.extractRecipeData = function (res) {
-        var body = res.json();
-        return body["recipe"] || {};
     };
     RecipeService.prototype.handleError = function (error) {
         if (error) {
