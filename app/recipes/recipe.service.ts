@@ -3,6 +3,7 @@ import { Headers, Http, Response, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import { Observable }     from 'rxjs/Observable';
 
@@ -18,13 +19,13 @@ export class RecipeService {
 
   getRecipes(): Observable<Recipe[]> {
     return this.http.get(this.recipesUrl)
-                    .map(this.extractRecipesData)
+                    .map(this.extractData)
                     .catch(this.handleError)
   }
 
   getRecipe(id: number): Observable<Recipe> {
     return this.http.get(this.recipesUrl + "/" + id)
-                    .map(this.extractRecipeData)
+                    .map(this.extractData)
                     .catch(this.handleError)
   }
 
@@ -55,17 +56,8 @@ export class RecipeService {
 
   private extractData(res: Response) {
     let body = res.json();  
+    console.log(res);
     return body || { };
-  }
-
-  private extractRecipesData(res: Response) {
-    let body = res.json();  
-    return body["recipes"] || { };
-  }
-
-  private extractRecipeData(res: Response) {
-    let body = res.json();  
-    return body["recipe"] || { };
   }
 
   private handleError (error: any) {
