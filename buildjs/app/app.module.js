@@ -12,8 +12,8 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
-var router_1 = require('@angular/router');
 var angular2_token_1 = require('angular2-token');
+var app_routing_module_1 = require('./app-routing.module');
 var app_component_1 = require('./app.component');
 var recipes_component_1 = require('./recipes/recipes.component');
 var recipe_detail_component_1 = require('./recipes/recipe-detail/recipe-detail.component');
@@ -21,6 +21,7 @@ var recipe_service_1 = require('./recipes/recipe.service');
 var ingredients_component_1 = require('./ingredients/ingredients.component');
 var ingredient_service_1 = require('./ingredients/ingredient.service');
 var ingredient_form_component_1 = require('./ingredients/ingredient-form.component');
+var auth_component_1 = require('./auth/auth.component');
 var AppModule = (function () {
     function AppModule(_tokenService) {
         this._tokenService = _tokenService;
@@ -32,27 +33,15 @@ var AppModule = (function () {
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
                 http_1.HttpModule,
-                router_1.RouterModule.forRoot([
-                    {
-                        path: 'recipes',
-                        component: recipes_component_1.RecipeComponent
-                    },
-                    {
-                        path: '',
-                        component: recipes_component_1.RecipeComponent
-                    },
-                    {
-                        path: 'recipe/:id',
-                        component: recipe_detail_component_1.RecipeDetailComponent
-                    }
-                ])
+                app_routing_module_1.AppRoutingModule
             ],
             declarations: [
                 app_component_1.AppComponent,
                 recipes_component_1.RecipeComponent,
                 recipe_detail_component_1.RecipeDetailComponent,
                 ingredients_component_1.IngredientComponent,
-                ingredient_form_component_1.IngredientFormComponent
+                ingredient_form_component_1.IngredientFormComponent,
+                auth_component_1.AuthComponent
             ],
             providers: [
                 recipe_service_1.RecipeService,
