@@ -3,9 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { Routes } from '@angular/router';
-import { Angular2TokenService } from 'angular2-token';
-
 import { AppRoutingModule } from './app-routing.module';
+
 import { AppComponent }  from './app.component';
 import { RecipeComponent }  from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
@@ -32,13 +31,9 @@ import { AuthComponent } from './auth/auth.component';
   ],
   providers: [
     RecipeService,
-    IngredientService,
-    Angular2TokenService
+    IngredientService
   ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule {
-  constructor(private _tokenService: Angular2TokenService) {
-    this._tokenService.init();
-  }
 }

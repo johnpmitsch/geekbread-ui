@@ -10,7 +10,8 @@ import { AuthComponent } from './auth/auth.component';
     RouterModule.forRoot([
       {
         path: '',
-        component: RecipeComponent
+        component: RecipeComponent,
+        pathMatch: 'full'
       },
       {
         path: 'auth',

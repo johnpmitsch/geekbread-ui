@@ -55,7 +55,6 @@ var RecipeService = (function () {
     };
     RecipeService.prototype.extractData = function (res) {
         var body = res.json();
-        console.log(res);
         return body || {};
     };
     RecipeService.prototype.handleError = function (error) {
