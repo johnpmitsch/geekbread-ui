@@ -56,7 +56,6 @@ export class RecipeService {
 
   private extractData(res: Response) {
     let body = res.json();  
-    console.log(res);
     return body || { };
   }
 
