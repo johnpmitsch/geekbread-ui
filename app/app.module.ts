@@ -4,6 +4,7 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { Angular2TokenService } from 'angular2-token';
 
 import { AppComponent }  from './app.component';
 import { RecipeComponent }  from './recipes/recipes.component';
@@ -31,9 +32,13 @@ import { AuthComponent } from './auth/auth.component';
   ],
   providers: [
     RecipeService,
-    IngredientService
+    IngredientService,
+    Angular2TokenService 
   ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule {
+  constructor(private _tokenService: Angular2TokenService) {
+        this._tokenService.init();
+  }
 }

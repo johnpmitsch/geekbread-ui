@@ -50,10 +50,9 @@ var AppModule = (function () {
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof angular2_token_1.Angular2TokenService !== 'undefined' && angular2_token_1.Angular2TokenService) === 'function' && _a) || Object])
+        __metadata('design:paramtypes', [angular2_token_1.Angular2TokenService])
     ], AppModule);
     return AppModule;
-    var _a;
 }());
 exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map
