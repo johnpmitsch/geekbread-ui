@@ -9,13 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+//import { Ingredient } from '../../ingredients/shared/ingredient.model'
 var AuthComponent = (function () {
     function AuthComponent() {
+        this.hero = {
+            name: 'Windstorm'
+        };
     }
     AuthComponent = __decorate([
         core_1.Component({
             selector: 'auth',
-            templateUrl: 'app/auth/auth.component.html'
+            template: "\nhi {{ hero.name }}\n"
         }), 
         __metadata('design:paramtypes', [])
     ], AuthComponent);
