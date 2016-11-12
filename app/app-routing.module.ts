@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { RecipeComponent }  from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { AuthComponent } from './auth/auth.component';
+import { UserComponent } from './users/user.component';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { AuthComponent } from './auth/auth.component';
         pathMatch: 'full'
       },
       {
-        path: 'auth',
-        component: AuthComponent
+        path: 'user',
+        component: UserComponent
       },
       {
         path: 'recipes',

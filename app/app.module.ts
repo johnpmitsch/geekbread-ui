@@ -13,7 +13,7 @@ import { RecipeService } from './recipes/recipe.service';
 import { IngredientComponent } from './ingredients/ingredients.component';
 import { IngredientService } from './ingredients/ingredient.service';
 import { IngredientFormComponent } from './ingredients/ingredient-form.component';
-import { AuthComponent } from './auth/auth.component';
+import { UserComponent } from './users/user.component';
 
 @NgModule({
   imports: [ 
@@ -28,7 +28,7 @@ import { AuthComponent } from './auth/auth.component';
     RecipeDetailComponent,
     IngredientComponent,
     IngredientFormComponent,
-    AuthComponent 
+    UserComponent 
   ],
   providers: [
     RecipeService,

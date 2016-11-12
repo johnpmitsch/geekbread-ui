@@ -2,6 +2,7 @@
   "name": "geekbread_js",
   "version": "1.0.0",
   "scripts": {
+    "prestart": "tsc",
     "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
     "lite": "lite-server",
     "postinstall": "typings install",
