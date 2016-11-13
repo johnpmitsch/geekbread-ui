@@ -1,26 +1,50 @@
 import { Component } from '@angular/core';
-
-export class User {
-  id: number;
-  name: string;
-}
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'users',
-  template: `
-    <h1>{{title}}</h1>
-    <h2>{{user.name}} details!</h2>
-    <div><label>id: </label>{{user.id}}</div>
-    <div>
-      <label>name: </label>
-      <input [(ngModel)]="user.name" placeholder="name">
-    </div>
-    `
+  templateUrl: 'app/users/user.component.html'
 })
+
 export class UserComponent {
-  title = 'Tour of Useres';
-  user: User = {
-    id: 1,
-    name: 'Windstorm'
-  };
+
+  constructor(private _tokenService: Angular2TokenService) {
+	 this._tokenService.init({
+			apiPath:                    "http://localhost:3000",
+
+			signInPath:                 'auth/sign_in',
+			signInRedirect:             null,
+			signInStoredUrlStorageKey:  null,
+
+			signOutPath:                'auth/sign_out',
+			validateTokenPath:          'auth/validate_token',
+
+			registerAccountPath:        'auth',
+			deleteAccountPath:          'auth',
+			registerAccountCallback:    window.location.href,
+
+			updatePasswordPath:         'auth',
+			resetPasswordPath:          'auth/password',
+			resetPasswordCallback:      window.location.href,
+
+			userTypes:                  null,
+
+			globalOptions: {
+				headers: {
+						'Content-Type':     'application/json',
+						'Accept':           'application/json'
+				}
+			}
+    });
+  }
+
+  signIn(email: string, password: string): void {
+    this._tokenService.signIn(
+      email,
+      password
+    ).subscribe(
+      res =>      console.log(res),
+      error =>    console.log(error)
+    );
+  }
 }

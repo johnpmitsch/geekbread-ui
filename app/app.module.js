@@ -23,9 +23,7 @@ var ingredient_service_1 = require('./ingredients/ingredient.service');
 var ingredient_form_component_1 = require('./ingredients/ingredient-form.component');
 var user_component_1 = require('./users/user.component');
 var AppModule = (function () {
-    function AppModule(_tokenService) {
-        this._tokenService = _tokenService;
-        this._tokenService.init();
+    function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
@@ -50,7 +48,7 @@ var AppModule = (function () {
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 
-        __metadata('design:paramtypes', [angular2_token_1.Angular2TokenService])
+        __metadata('design:paramtypes', [])
     ], AppModule);
     return AppModule;
 }());

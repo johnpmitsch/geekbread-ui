@@ -9,26 +9,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var User = (function () {
-    function User() {
-    }
-    return User;
-}());
-exports.User = User;
+var angular2_token_1 = require('angular2-token');
 var UserComponent = (function () {
-    function UserComponent() {
-        this.title = 'Tour of Useres';
-        this.user = {
-            id: 1,
-            name: 'Windstorm'
-        };
+    function UserComponent(_tokenService) {
+        this._tokenService = _tokenService;
+        this._tokenService.init({
+            apiPath: "http://localhost:3000",
+            signInPath: 'auth/sign_in',
+            signInRedirect: null,
+            signInStoredUrlStorageKey: null,
+            signOutPath: 'auth/sign_out',
+            validateTokenPath: 'auth/validate_token',
+            registerAccountPath: 'auth',
+            deleteAccountPath: 'auth',
+            registerAccountCallback: window.location.href,
+            updatePasswordPath: 'auth',
+            resetPasswordPath: 'auth/password',
+            resetPasswordCallback: window.location.href,
+            userTypes: null,
+            globalOptions: {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }
+        });
     }
+    UserComponent.prototype.signIn = function (email, password) {
+        this._tokenService.signIn(email, password).subscribe(function (res) { return console.log(res); }, function (error) { return console.log(error); });
+    };
     UserComponent = __decorate([
         core_1.Component({
             selector: 'users',
-            template: "\n    <h1>{{title}}</h1>\n    <h2>{{user.name}} details!</h2>\n    <div><label>id: </label>{{user.id}}</div>\n    <div>\n      <label>name: </label>\n      <input [(ngModel)]=\"user.name\" placeholder=\"name\">\n    </div>\n    "
+            templateUrl: 'app/users/user.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [angular2_token_1.Angular2TokenService])
     ], UserComponent);
     return UserComponent;
 }());
