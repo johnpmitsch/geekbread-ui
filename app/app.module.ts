@@ -37,8 +37,4 @@ import { UserComponent } from './users/user.component';
   ],
   bootstrap:    [ AppComponent ]
 })
-export class AppModule {
-  constructor(private _tokenService: Angular2TokenService) {
-        this._tokenService.init();
-  }
-}
+export class AppModule {}
