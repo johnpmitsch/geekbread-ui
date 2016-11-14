@@ -19,7 +19,6 @@ var UserComponent = (function () {
             signInRedirect: null,
             signInStoredUrlStorageKey: null,
             signOutPath: 'auth/sign_out',
-            validateTokenPath: 'auth/validate_token',
             registerAccountPath: 'auth',
             deleteAccountPath: 'auth',
             registerAccountCallback: window.location.href,
@@ -35,9 +34,6 @@ var UserComponent = (function () {
             }
         });
     }
-    UserComponent.prototype.signIn = function (email, password) {
-        this._tokenService.signIn(email, password).subscribe(function (res) { return console.log(res); }, function (error) { return console.log(error); });
-    };
     UserComponent = __decorate([
         core_1.Component({
             selector: 'users',
