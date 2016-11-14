@@ -14,6 +14,7 @@ import { IngredientComponent } from './ingredients/ingredients.component';
 import { IngredientService } from './ingredients/ingredient.service';
 import { IngredientFormComponent } from './ingredients/ingredient-form.component';
 import { UserComponent } from './users/user.component';
+import { SignInComponent } from './users/sign-in/sign-in.component';
 
 @NgModule({
   imports: [ 
@@ -28,7 +29,8 @@ import { UserComponent } from './users/user.component';
     RecipeDetailComponent,
     IngredientComponent,
     IngredientFormComponent,
-    UserComponent 
+    UserComponent,
+    SignInComponent
   ],
   providers: [
     RecipeService,

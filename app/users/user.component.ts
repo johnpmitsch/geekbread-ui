@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 
+import { AuthData } from './shared/auth.model';
+
 @Component({
   selector: 'users',
   templateUrl: 'app/users/user.component.html'
@@ -17,7 +19,6 @@ export class UserComponent {
 			signInStoredUrlStorageKey:  null,
 
 			signOutPath:                'auth/sign_out',
-			validateTokenPath:          'auth/validate_token',
 
 			registerAccountPath:        'auth',
 			deleteAccountPath:          'auth',
@@ -36,15 +37,5 @@ export class UserComponent {
 				}
 			}
     });
-  }
-
-  signIn(email: string, password: string): void {
-    this._tokenService.signIn(
-      email,
-      password
-    ).subscribe(
-      res =>      console.log(res),
-      error =>    console.log(error)
-    );
   }
 }
