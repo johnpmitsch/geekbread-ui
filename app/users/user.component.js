@@ -9,37 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var angular2_token_1 = require('angular2-token');
 var UserComponent = (function () {
-    function UserComponent(_tokenService) {
-        this._tokenService = _tokenService;
-        this._tokenService.init({
-            apiPath: "http://localhost:3000",
-            signInPath: 'auth/sign_in',
-            signInRedirect: null,
-            signInStoredUrlStorageKey: null,
-            signOutPath: 'auth/sign_out',
-            registerAccountPath: 'auth',
-            deleteAccountPath: 'auth',
-            registerAccountCallback: 'recipes',
-            updatePasswordPath: 'auth',
-            resetPasswordPath: 'auth/password',
-            resetPasswordCallback: window.location.href,
-            userTypes: null,
-            globalOptions: {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                }
-            }
-        });
+    function UserComponent() {
     }
     UserComponent = __decorate([
         core_1.Component({
             selector: 'users',
             templateUrl: 'app/users/user.component.html'
         }), 
-        __metadata('design:paramtypes', [angular2_token_1.Angular2TokenService])
+        __metadata('design:paramtypes', [])
     ], UserComponent);
     return UserComponent;
 }());

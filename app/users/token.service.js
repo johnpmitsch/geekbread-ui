@@ -41,4 +41,4 @@ var TokenService = (function () {
     return TokenService;
 }());
 exports.TokenService = TokenService;
-//# sourceMappingURL=token-service.js.map
+//# sourceMappingURL=token.service.js.map
