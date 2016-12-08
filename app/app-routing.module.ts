@@ -4,6 +4,9 @@ import { RouterModule } from '@angular/router';
 import { RecipeComponent }  from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { UserComponent } from './users/user.component';
+import { RegisterComponent } from './users/register/register.component';
+
+import { Angular2TokenService } from 'angular2-token';
 
 @NgModule({
   imports: [
@@ -18,12 +21,16 @@ import { UserComponent } from './users/user.component';
         component: UserComponent
       },
       {
+        path: 'register',
+        component: RegisterComponent
+      },
+      {
         path: 'recipes',
-        component: RecipeComponent
+        component: RecipeComponent,
       },
       {
         path: 'recipe/:id',
-        component: RecipeDetailComponent
+        component: RecipeDetailComponent,
       }
     ])
   ],

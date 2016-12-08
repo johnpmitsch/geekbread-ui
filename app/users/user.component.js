@@ -21,7 +21,7 @@ var UserComponent = (function () {
             signOutPath: 'auth/sign_out',
             registerAccountPath: 'auth',
             deleteAccountPath: 'auth',
-            registerAccountCallback: window.location.href,
+            registerAccountCallback: 'recipes',
             updatePasswordPath: 'auth',
             resetPasswordPath: 'auth/password',
             resetPasswordCallback: window.location.href,

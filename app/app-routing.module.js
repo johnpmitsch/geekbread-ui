@@ -13,6 +13,7 @@ var router_1 = require('@angular/router');
 var recipes_component_1 = require('./recipes/recipes.component');
 var recipe_detail_component_1 = require('./recipes/recipe-detail/recipe-detail.component');
 var user_component_1 = require('./users/user.component');
+var register_component_1 = require('./users/register/register.component');
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
     }
@@ -30,12 +31,16 @@ var AppRoutingModule = (function () {
                         component: user_component_1.UserComponent
                     },
                     {
+                        path: 'register',
+                        component: register_component_1.RegisterComponent
+                    },
+                    {
                         path: 'recipes',
-                        component: recipes_component_1.RecipeComponent
+                        component: recipes_component_1.RecipeComponent,
                     },
                     {
                         path: 'recipe/:id',
-                        component: recipe_detail_component_1.RecipeDetailComponent
+                        component: recipe_detail_component_1.RecipeDetailComponent,
                     }
                 ])
             ],
