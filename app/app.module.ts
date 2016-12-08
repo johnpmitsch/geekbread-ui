@@ -14,6 +14,7 @@ import { IngredientComponent } from './ingredients/ingredients.component';
 import { IngredientService } from './ingredients/ingredient.service';
 import { IngredientFormComponent } from './ingredients/ingredient-form.component';
 import { UserComponent } from './users/user.component';
+import { TokenService } from './users/token.service';
 import { SignInComponent } from './users/sign-in/sign-in.component';
 import { RegisterComponent } from './users/register/register.component';
 
@@ -37,6 +38,7 @@ import { RegisterComponent } from './users/register/register.component';
   providers: [
     RecipeService,
     IngredientService,
+    TokenService,
     Angular2TokenService 
   ],
   bootstrap:    [ AppComponent ]

@@ -22,6 +22,7 @@ var ingredients_component_1 = require('./ingredients/ingredients.component');
 var ingredient_service_1 = require('./ingredients/ingredient.service');
 var ingredient_form_component_1 = require('./ingredients/ingredient-form.component');
 var user_component_1 = require('./users/user.component');
+var token_service_1 = require('./users/token.service');
 var sign_in_component_1 = require('./users/sign-in/sign-in.component');
 var register_component_1 = require('./users/register/register.component');
 var AppModule = (function () {
@@ -48,6 +49,7 @@ var AppModule = (function () {
             providers: [
                 recipe_service_1.RecipeService,
                 ingredient_service_1.IngredientService,
+                token_service_1.TokenService,
                 angular2_token_1.Angular2TokenService
             ],
             bootstrap: [app_component_1.AppComponent]

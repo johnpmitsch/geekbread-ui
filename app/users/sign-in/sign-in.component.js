@@ -9,16 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var angular2_token_1 = require('angular2-token');
+var token_service_1 = require('../token.service');
 var SignInComponent = (function () {
-    function SignInComponent(_tokenService) {
-        this._tokenService = _tokenService;
+    function SignInComponent(tokenService) {
+        this.tokenService = tokenService;
         this._authData = {};
     }
+    ;
     SignInComponent.prototype.onSubmit = function () {
         var _this = this;
         this._output = null;
-        this._tokenService.signIn(this._authData.email, this._authData.password).subscribe(function (res) {
+        this.tokenService._tokenService.signIn(this._authData.email, this._authData.password).subscribe(function (res) {
             _this._authData = {};
             _this._output = res;
         }, function (error) {
@@ -27,17 +28,17 @@ var SignInComponent = (function () {
         });
     };
     SignInComponent.prototype.currentUserSignedIn = function () {
-        this._tokenService.userSignedIn();
+        this.tokenService._tokenService.userSignedIn();
     };
     SignInComponent.prototype.signOut = function () {
-        this._tokenService.signOut().subscribe(function (res) { return console.log(res); }, function (error) { return console.log(error); });
+        this.tokenService._tokenService.signOut().subscribe(function (res) { return console.log(res); }, function (error) { return console.log(error); });
     };
     SignInComponent = __decorate([
         core_1.Component({
             selector: 'sign-in',
             templateUrl: 'app/users/sign-in/sign-in.component.html'
         }), 
-        __metadata('design:paramtypes', [angular2_token_1.Angular2TokenService])
+        __metadata('design:paramtypes', [token_service_1.TokenService])
     ], SignInComponent);
     return SignInComponent;
 }());
