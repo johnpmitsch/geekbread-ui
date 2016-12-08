@@ -10,7 +10,7 @@ import { AuthData } from './shared/auth.model';
 
 export class UserComponent {
 
-  constructor(private _tokenService: Angular2TokenService) {
+  constructor(public _tokenService: Angular2TokenService) {
 	 this._tokenService.init({
 			apiPath:                    "http://localhost:3000",
 
@@ -22,7 +22,7 @@ export class UserComponent {
 
 			registerAccountPath:        'auth',
 			deleteAccountPath:          'auth',
-			registerAccountCallback:    window.location.href,
+			registerAccountCallback:    'recipes',
 
 			updatePasswordPath:         'auth',
 			resetPasswordPath:          'auth/password',

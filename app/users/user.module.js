@@ -14,6 +14,7 @@ var common_1 = require('@angular/common');
 var router_1 = require('@angular/router');
 var user_component_1 = require('./user.component');
 var sign_in_component_1 = require('./sign-in/sign-in.component');
+var register_component_1 = require('./register/register.component');
 var UserModule = (function () {
     function UserModule() {
     }
@@ -23,12 +24,14 @@ var UserModule = (function () {
                 common_1.CommonModule,
                 forms_1.FormsModule,
                 router_1.RouterModule,
-                user_component_1.UserComponent
             ],
             declarations: [
                 user_component_1.UserComponent,
-                sign_in_component_1.SignInComponent
+                sign_in_component_1.SignInComponent,
+                user_component_1.UserComponent,
+                register_component_1.RegisterComponent
             ],
+            providers: [],
             exports: [
                 user_component_1.UserComponent
             ]

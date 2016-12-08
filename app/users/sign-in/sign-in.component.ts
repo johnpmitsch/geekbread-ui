@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-
 import { AuthData } from '../shared/auth.model';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'sign-in',
@@ -9,6 +9,9 @@ import { AuthData } from '../shared/auth.model';
 
 export class SignInComponent {
 	private _authData: AuthData = <AuthData>{};
+	private _output: any;
+
+  constructor(private _tokenService: Angular2TokenService) { }
 
     onSubmit() {
 			this._output = null;
@@ -24,6 +27,16 @@ export class SignInComponent {
 							this._output    = error;
 					}
 			);
-  }
+    }
 
+		currentUserSignedIn() {
+			this._tokenService.userSignedIn();
+		}
+
+		signOut() {
+			this._tokenService.signOut().subscribe(
+					res =>      console.log(res),
+					error =>    console.log(error)
+			);
+		}
 }
