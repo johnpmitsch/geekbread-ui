@@ -9,9 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var token_service_1 = require('../token.service');
 var SignInComponent = (function () {
-    function SignInComponent(tokenService) {
+    function SignInComponent(router, tokenService) {
+        this.router = router;
         this.tokenService = tokenService;
         this._authData = {};
     }
@@ -22,13 +24,14 @@ var SignInComponent = (function () {
         this.tokenService._tokenService.signIn(this._authData.email, this._authData.password).subscribe(function (res) {
             _this._authData = {};
             _this._output = res;
+            _this.router.navigate(['/recipes']);
         }, function (error) {
             _this._authData = {};
             _this._output = error;
         });
     };
     SignInComponent.prototype.currentUserSignedIn = function () {
-        this.tokenService._tokenService.userSignedIn();
+        return this.tokenService._tokenService.userSignedIn();
     };
     SignInComponent.prototype.signOut = function () {
         this.tokenService._tokenService.signOut().subscribe(function (res) { return console.log(res); }, function (error) { return console.log(error); });
@@ -38,7 +41,7 @@ var SignInComponent = (function () {
             selector: 'sign-in',
             templateUrl: 'app/users/sign-in/sign-in.component.html'
         }), 
-        __metadata('design:paramtypes', [token_service_1.TokenService])
+        __metadata('design:paramtypes', [router_1.Router, token_service_1.TokenService])
     ], SignInComponent);
     return SignInComponent;
 }());

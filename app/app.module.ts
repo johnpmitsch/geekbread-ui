@@ -17,6 +17,7 @@ import { UserComponent } from './users/user.component';
 import { TokenService } from './users/token.service';
 import { SignInComponent } from './users/sign-in/sign-in.component';
 import { RegisterComponent } from './users/register/register.component';
+import { OutputComponent } from './users/shared/output/output.component';
 
 @NgModule({
   imports: [ 
@@ -33,7 +34,8 @@ import { RegisterComponent } from './users/register/register.component';
     IngredientFormComponent,
     UserComponent,
     SignInComponent,
-    RegisterComponent
+    RegisterComponent,
+		OutputComponent
   ],
   providers: [
     RecipeService,

@@ -25,7 +25,6 @@ var RegisterComponent = (function () {
         }, function (error) {
             _this._authData = {};
             _this._output = error;
-            _this.error_message = error["errors"]["full_messages"].toString();
         });
     };
     RegisterComponent = __decorate([

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthData } from '../shared/auth.model';
 import { Angular2TokenService } from 'angular2-token';
 import { TokenService } from '../token.service';
@@ -13,6 +14,7 @@ export class SignInComponent {
 	private _output: any;
 
   constructor(
+    private router: Router,
 		private tokenService: TokenService
   ) {};
 
@@ -25,6 +27,7 @@ export class SignInComponent {
 					res => {
 							this._authData  = <AuthData>{};
 							this._output    = res;
+              this.router.navigate(['/recipes']);
 					}, error => {
 							this._authData  = <AuthData>{};
 							this._output    = error;
@@ -33,7 +36,7 @@ export class SignInComponent {
     }
 
 		currentUserSignedIn() {
-			this.tokenService._tokenService.userSignedIn();
+			return this.tokenService._tokenService.userSignedIn();
 		}
 
 		signOut() {

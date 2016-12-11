@@ -9,16 +9,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var token_service_1 = require('./users/token.service');
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(tokenService) {
+        this.tokenService = tokenService;
         this.title = 'Geekbread';
     }
+    ;
+    AppComponent.prototype.currentUserSignedIn = function () {
+        return this.tokenService._tokenService.userSignedIn();
+    };
+    AppComponent.prototype.signOut = function () {
+        this.tokenService._tokenService.signOut().subscribe(function (res) { return console.log(res); }, function (error) { return console.log(error); });
+    };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             templateUrl: 'app/app.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [token_service_1.TokenService])
     ], AppComponent);
     return AppComponent;
 }());

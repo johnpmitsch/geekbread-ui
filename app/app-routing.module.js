@@ -12,8 +12,9 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var recipes_component_1 = require('./recipes/recipes.component');
 var recipe_detail_component_1 = require('./recipes/recipe-detail/recipe-detail.component');
-var user_component_1 = require('./users/user.component');
 var register_component_1 = require('./users/register/register.component');
+var sign_in_component_1 = require('./users/sign-in/sign-in.component');
+var angular2_token_1 = require('angular2-token');
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
     }
@@ -24,11 +25,12 @@ var AppRoutingModule = (function () {
                     {
                         path: '',
                         component: recipes_component_1.RecipeComponent,
-                        pathMatch: 'full'
+                        pathMatch: 'full',
+                        canActivate: [angular2_token_1.Angular2TokenService]
                     },
                     {
-                        path: 'user',
-                        component: user_component_1.UserComponent
+                        path: 'sign-in',
+                        component: sign_in_component_1.SignInComponent
                     },
                     {
                         path: 'register',
@@ -37,10 +39,12 @@ var AppRoutingModule = (function () {
                     {
                         path: 'recipes',
                         component: recipes_component_1.RecipeComponent,
+                        canActivate: [angular2_token_1.Angular2TokenService]
                     },
                     {
                         path: 'recipe/:id',
                         component: recipe_detail_component_1.RecipeDetailComponent,
+                        canActivate: [angular2_token_1.Angular2TokenService]
                     }
                 ])
             ],
