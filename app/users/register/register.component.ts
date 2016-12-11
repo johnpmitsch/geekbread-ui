@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Angular2TokenService } from 'angular2-token';
 import { AuthData } from '../shared/auth.model';
 import { UserComponent } from '../user.component';
 import { TokenService } from '../token.service';
@@ -32,7 +31,6 @@ export class RegisterComponent {
             }, error => {
                 this._authData  = <AuthData>{};
                 this._output    = error;
-                this.error_message = error["errors"]["full_messages"].toString()
             }
         );
     }

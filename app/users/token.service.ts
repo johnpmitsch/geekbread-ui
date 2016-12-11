@@ -8,7 +8,7 @@ export class TokenService {
 			apiPath:                    "http://localhost:3000",
 
 			signInPath:                 'auth/sign_in',
-			signInRedirect:             null,
+			signInRedirect:             'sign-in',
 			signInStoredUrlStorageKey:  null,
 
 			signOutPath:                'auth/sign_out',

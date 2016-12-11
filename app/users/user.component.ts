@@ -7,6 +7,4 @@ import { AuthData } from './shared/auth.model';
 })
 
 export class UserComponent {
-
-
 }

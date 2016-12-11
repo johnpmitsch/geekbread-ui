@@ -25,6 +25,7 @@ var user_component_1 = require('./users/user.component');
 var token_service_1 = require('./users/token.service');
 var sign_in_component_1 = require('./users/sign-in/sign-in.component');
 var register_component_1 = require('./users/register/register.component');
+var output_component_1 = require('./users/shared/output/output.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -44,7 +45,8 @@ var AppModule = (function () {
                 ingredient_form_component_1.IngredientFormComponent,
                 user_component_1.UserComponent,
                 sign_in_component_1.SignInComponent,
-                register_component_1.RegisterComponent
+                register_component_1.RegisterComponent,
+                output_component_1.OutputComponent
             ],
             providers: [
                 recipe_service_1.RecipeService,
