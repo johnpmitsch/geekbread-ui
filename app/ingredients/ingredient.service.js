@@ -22,8 +22,13 @@ var IngredientService = (function () {
         this.recipesUrl = this.baseUrl + 'recipes';
         this.ingredientsUrl = this.baseUrl + 'ingredients';
     }
-    IngredientService.prototype.getIngredients = function (recipeId) {
-        return this.http.get(this.recipesUrl + "/" + recipeId + "/ingredients")
+    IngredientService.prototype.getIngredients = function (recipeId, ingredientType) {
+        if (ingredientType === void 0) { ingredientType = null; }
+        var url = this.recipesUrl + "/" + recipeId + "/ingredients";
+        if (ingredientType != null) {
+            url += "?ingredient_type=" + ingredientType;
+        }
+        return this.http.get(url)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -33,7 +38,7 @@ var IngredientService = (function () {
             .catch(this.handleError);
     };
     IngredientService.prototype.updateIngredient = function (ingredientId, name, percentage) {
-        var body = JSON.stringify({ name: name, percentage: percentage });
+        var body = JSON.stringify({ ingredient: { name: name, percentage: percentage } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.put(this.ingredientsUrl + "/" + ingredientId, body, options)

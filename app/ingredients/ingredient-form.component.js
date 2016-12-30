@@ -21,9 +21,9 @@ var IngredientFormComponent = (function () {
         this.active = true;
     }
     IngredientFormComponent.prototype.onSubmit = function () { this.submitted = true; };
-    IngredientFormComponent.prototype.newIngredient = function (name, percentage) {
+    IngredientFormComponent.prototype.newIngredient = function (name, percentage, type) {
         var _this = this;
-        this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage)
+        this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage, type)
             .subscribe(function (sucess) { return _this.notify.emit(null); }, function (error) { return _this.errorMessage = error; });
     };
     __decorate([

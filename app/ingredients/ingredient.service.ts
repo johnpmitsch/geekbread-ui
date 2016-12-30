@@ -17,8 +17,12 @@ export class IngredientService {
 
   constructor(private http: Http) {}
 
-  getIngredients(recipeId: number): Observable<Ingredient[]> {
-    return this.http.get(this.recipesUrl + "/" + recipeId + "/ingredients")
+  getIngredients(recipeId: number, ingredientType: string = null): Observable<Ingredient[]> {
+    let url = this.recipesUrl + "/" + recipeId + "/ingredients"
+    if (ingredientType != null) { 
+      url += "?ingredient_type=" + ingredientType
+    }
+    return this.http.get(url)
                     .map(this.extractData)
                     .catch(this.handleError)
   }
@@ -30,7 +34,7 @@ export class IngredientService {
   }
 
   updateIngredient(ingredientId: number, name: string, percentage: number): Observable<Ingredient[]> {
-    let body = JSON.stringify({ name: name, percentage: percentage});
+    let body = JSON.stringify({ ingredient: { name: name, percentage: percentage}});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(this.ingredientsUrl + "/" + ingredientId, body, options)

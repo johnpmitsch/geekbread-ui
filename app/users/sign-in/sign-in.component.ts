@@ -18,31 +18,31 @@ export class SignInComponent {
 		private tokenService: TokenService
   ) {};
 
-    onSubmit() {
-			this._output = null;
-			this.tokenService._tokenService.signIn(
-					this._authData.email,
-					this._authData.password
-			).subscribe(
-					res => {
-							this._authData  = <AuthData>{};
-							this._output    = res;
-              this.router.navigate(['/recipes']);
-					}, error => {
-							this._authData  = <AuthData>{};
-							this._output    = error;
-					}
-			);
-    }
+  onSubmit() {
+		this._output = null;
+		this.tokenService._tokenService.signIn(
+				this._authData.email,
+				this._authData.password
+		).subscribe(
+				res => {
+						this._authData  = <AuthData>{};
+						this._output    = res;
+            this.router.navigate(['/recipes']);
+				}, error => {
+						this._authData  = <AuthData>{};
+						this._output    = error;
+				}
+		);
+  }
 
-		currentUserSignedIn() {
-			return this.tokenService._tokenService.userSignedIn();
-		}
+	currentUserSignedIn() {
+		return this.tokenService._tokenService.userSignedIn();
+	}
 
-		signOut() {
-			this.tokenService._tokenService.signOut().subscribe(
-					res =>      console.log(res),
-					error =>    console.log(error)
-			);
-		}
+	signOut() {
+		this.tokenService._tokenService.signOut().subscribe(
+				res =>      console.log(res),
+				error =>    console.log(error)
+		);
+	}
 }

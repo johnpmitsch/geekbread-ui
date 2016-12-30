@@ -10,8 +10,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var token_service_1 = require('../token.service');
+var router_1 = require('@angular/router');
 var RegisterComponent = (function () {
-    function RegisterComponent(tokenService) {
+    function RegisterComponent(router, tokenService) {
+        this.router = router;
         this.tokenService = tokenService;
         this._authData = {};
     }
@@ -22,6 +24,7 @@ var RegisterComponent = (function () {
         this.tokenService._tokenService.registerAccount(this._authData.email, this._authData.password, this._authData.passwordConfirmation).subscribe(function (res) {
             _this._authData = {};
             _this._output = res;
+            _this.router.navigate(['/recipes']);
         }, function (error) {
             _this._authData = {};
             _this._output = error;
@@ -32,7 +35,7 @@ var RegisterComponent = (function () {
             selector: 'register',
             templateUrl: 'app/users/register/register.component.html'
         }), 
-        __metadata('design:paramtypes', [token_service_1.TokenService])
+        __metadata('design:paramtypes', [router_1.Router, token_service_1.TokenService])
     ], RegisterComponent);
     return RegisterComponent;
 }());
