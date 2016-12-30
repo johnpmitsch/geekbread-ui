@@ -15,9 +15,11 @@ require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var Observable_1 = require('rxjs/Observable');
+var token_service_1 = require('../users/token.service');
 var RecipeService = (function () {
-    function RecipeService(http) {
+    function RecipeService(http, tokenService) {
         this.http = http;
+        this.tokenService = tokenService;
         this.baseUrl = 'http://localhost:3000/v1/';
         this.recipesUrl = this.baseUrl + 'recipes';
         this.ingredientsUrl = this.baseUrl + 'ingredients';
@@ -33,15 +35,17 @@ var RecipeService = (function () {
             .catch(this.handleError);
     };
     RecipeService.prototype.addRecipe = function (name) {
-        var body = JSON.stringify({ name: name });
+        var hi = this.tokenService._tokenService;
+        console.log(hi);
+        var body = JSON.stringify({ recipe: { name: name } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.recipesUrl, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    RecipeService.prototype.addIngredientToRecipe = function (recipeId, name, percentage) {
-        var body = JSON.stringify({ name: name, percentage: percentage, recipe_id: recipeId });
+    RecipeService.prototype.addIngredientToRecipe = function (recipeId, name, percentage, type) {
+        var body = JSON.stringify({ ingredient: { name: name, percentage: percentage, recipe_id: recipeId, type: type } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.ingredientsUrl, body, options)
@@ -67,7 +71,7 @@ var RecipeService = (function () {
     };
     RecipeService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, token_service_1.TokenService])
     ], RecipeService);
     return RecipeService;
 }());

@@ -10,9 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var token_service_1 = require('./users/token.service');
+var router_1 = require('@angular/router');
 var AppComponent = (function () {
-    function AppComponent(tokenService) {
+    function AppComponent(tokenService, router) {
         this.tokenService = tokenService;
+        this.router = router;
         this.title = 'Geekbread';
     }
     ;
@@ -20,14 +22,20 @@ var AppComponent = (function () {
         return this.tokenService._tokenService.userSignedIn();
     };
     AppComponent.prototype.signOut = function () {
-        this.tokenService._tokenService.signOut().subscribe(function (res) { return console.log(res); }, function (error) { return console.log(error); });
+        var _this = this;
+        this.tokenService._tokenService.signOut().subscribe(function (res) {
+            _this._output = res;
+            _this.router.navigate(['/sign-in']);
+        }, function (error) {
+            _this._output = error;
+        });
     };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
             templateUrl: 'app/app.component.html'
         }), 
-        __metadata('design:paramtypes', [token_service_1.TokenService])
+        __metadata('design:paramtypes', [token_service_1.TokenService, router_1.Router])
     ], AppComponent);
     return AppComponent;
 }());

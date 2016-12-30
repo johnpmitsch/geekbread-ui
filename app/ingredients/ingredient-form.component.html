@@ -20,9 +20,21 @@
 							 [(ngModel)]="model.percentage" name="percentage"
 							 #percentage="ngModel" >
 			</div>
+			<div class="form-group">
+				<label for="type">Type</label>
+				<select #ingredientType
+               type="text" class="form-control" 
+               placeholder="70"
+							 required
+							 [(ngModel)]="model.type" name="type"
+							 #percentage="ngModel" >
+           <option value="Flour">flour</option>     
+           <option value="Other">non-flour</option>     
+        </select>      
+			</div>
       <button type="button" 
               class="btn btn-success"
-              (click)="newIngredient(ingredientName.value, ingredientPercentage.value)"
+              (click)="newIngredient(ingredientName.value, ingredientPercentage.value, ingredientType.value)"
               [disabled]="!ingredientForm.form.valid">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       </button>

@@ -7,7 +7,7 @@
   </div>
 
   <div class='well well-sm'>
-    Total Dough Weight(grams): <input #totalWeight (keyup)="submitTotalDoughWeight(totalWeight.value)" placeholder="Enter weight"/>
+    Total Dough Weight(grams): <input #totalWeight (keyup.enter)="submitTotalDoughWeight(totalWeight.value)" placeholder="Enter weight"/>
   <button (click)= "submitTotalDoughWeight(totalWeight.value)" class="btn btn-primary btn-sm">Calculate</button>
   </div>
 
