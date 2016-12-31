@@ -37,10 +37,11 @@ var IngredientService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    IngredientService.prototype.updateIngredient = function (ingredientId, name, percentage) {
-        var body = JSON.stringify({ ingredient: { name: name, percentage: percentage } });
+    IngredientService.prototype.updateIngredient = function (ingredientId, name, percentage, type) {
+        var body = JSON.stringify({ ingredient: { name: name, percentage: percentage, type: type } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
+        console.log(body);
         return this.http.put(this.ingredientsUrl + "/" + ingredientId, body, options)
             .map(this.extractData)
             .catch(this.handleError);

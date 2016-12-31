@@ -32,6 +32,10 @@ export class IngredientComponent implements OnInit {
     this.totalDoughWeight = this.totalDoughWeight ||  0;
   }
 
+  isFlour?(ingredient): boolean {
+    return ingredient.type == "Flour";
+  }
+
   getTotalPercentage(): number {
     let total = 0;
     for (var ingredient of this.ingredients) {
@@ -53,6 +57,12 @@ export class IngredientComponent implements OnInit {
     this.flourWeight = (this.totalDoughWeight / totalPercentage) * 100;
   }
 
+  resetIngredientAmounts(): void {
+    for (var ingredient of this.ingredients) {
+      ingredient.amount = null;
+    }
+  }
+
   updateIngredientAmounts(): void {
     for (var ingredient of this.ingredients) {
       ingredient.amount = (this.flourWeight * ingredient.percentage)/100
@@ -61,14 +71,11 @@ export class IngredientComponent implements OnInit {
  
   submitTotalDoughWeight(doughWeight: number): void {
     this.totalDoughWeight = doughWeight;
-    this.getIngredients();
     this.getFlourWeight();
     this.getIngredientType("Flour")
     let flourPercentage = this.getSpecifiedIngredientPercentage();
-    console.log(flourPercentage);
-    if (flourPercentage == 100) {
-      this.updateIngredientAmounts();
-    } else {
+    this.updateIngredientAmounts();
+    if !(flourPercentage == 100) {
       this.errorMessage = "The flour ingredient percentages for this recipe do not add up to %100. Please correct them and re-submit";
     } 
   }
@@ -87,8 +94,8 @@ export class IngredientComponent implements OnInit {
                                      error   => this.errorMessage = <any>error);
   }
 
-  updateIngredient(ingredientId, name, percentage): void {
-    this.ingredientService.updateIngredient(ingredientId, name, percentage)
+  updateIngredient(ingredientId, name, percentage, type): void {
+    this.ingredientService.updateIngredient(ingredientId, name, percentage, type)
                           .subscribe(success => this.ingredients = this.getIngredients(),
                                      error   => this.errorMessage = <any>error);
     location.reload(); 

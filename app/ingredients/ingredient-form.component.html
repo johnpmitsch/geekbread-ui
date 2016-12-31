@@ -24,10 +24,9 @@
 				<label for="type">Type</label>
 				<select #ingredientType
                type="text" class="form-control" 
-               placeholder="70"
 							 required
 							 [(ngModel)]="model.type" name="type"
-							 #percentage="ngModel" >
+							 #type="ngModel" >
            <option value="Flour">flour</option>     
            <option value="Other">non-flour</option>     
         </select>      

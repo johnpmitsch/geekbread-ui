@@ -33,15 +33,14 @@ export class IngredientService {
                     .catch(this.handleError)
   }
 
-  updateIngredient(ingredientId: number, name: string, percentage: number): Observable<Ingredient[]> {
-    let body = JSON.stringify({ ingredient: { name: name, percentage: percentage}});
+  updateIngredient(ingredientId: number, name: string, percentage: number, type: string): Observable<Ingredient[]> {
+    let body = JSON.stringify({ ingredient: { name: name, percentage: percentage, type: type}});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.put(this.ingredientsUrl + "/" + ingredientId, body, options)
                     .map(this.extractData)
                     .catch(this.handleError)
   }
-
 
   private extractData(res: Response) {
     let body = res.json();  
