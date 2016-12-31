@@ -21,6 +21,9 @@ var IngredientComponent = (function () {
         this.getIngredientType("Flour");
         this.totalDoughWeight = this.totalDoughWeight || 0;
     };
+    IngredientComponent.prototype.isFlour = function (ingredient) {
+        return ingredient.type == "Flour";
+    };
     IngredientComponent.prototype.getTotalPercentage = function () {
         var total = 0;
         for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
@@ -41,6 +44,12 @@ var IngredientComponent = (function () {
         var totalPercentage = this.getTotalPercentage();
         this.flourWeight = (this.totalDoughWeight / totalPercentage) * 100;
     };
+    IngredientComponent.prototype.resetIngredientAmounts = function () {
+        for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
+            var ingredient = _a[_i];
+            ingredient.amount = null;
+        }
+    };
     IngredientComponent.prototype.updateIngredientAmounts = function () {
         for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
             var ingredient = _a[_i];
@@ -49,15 +58,11 @@ var IngredientComponent = (function () {
     };
     IngredientComponent.prototype.submitTotalDoughWeight = function (doughWeight) {
         this.totalDoughWeight = doughWeight;
-        this.getIngredients();
         this.getFlourWeight();
         this.getIngredientType("Flour");
         var flourPercentage = this.getSpecifiedIngredientPercentage();
-        console.log(flourPercentage);
-        if (flourPercentage == 100) {
-            this.updateIngredientAmounts();
-        }
-        else {
+        this.updateIngredientAmounts();
+        if (!(flourPercentage == 100)) {
             this.errorMessage = "The flour ingredient percentages for this recipe do not add up to %100. Please correct them and re-submit";
         }
     };
@@ -74,9 +79,9 @@ var IngredientComponent = (function () {
         this.ingredientService.deleteIngredient(ingredientId)
             .subscribe(function (success) { return _this.getIngredients(); }, function (error) { return _this.errorMessage = error; });
     };
-    IngredientComponent.prototype.updateIngredient = function (ingredientId, name, percentage) {
+    IngredientComponent.prototype.updateIngredient = function (ingredientId, name, percentage, type) {
         var _this = this;
-        this.ingredientService.updateIngredient(ingredientId, name, percentage)
+        this.ingredientService.updateIngredient(ingredientId, name, percentage, type)
             .subscribe(function (success) { return _this.ingredients = _this.getIngredients(); }, function (error) { return _this.errorMessage = error; });
         location.reload();
     };
