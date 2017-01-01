@@ -28,7 +28,7 @@ var RecipeComponent = (function () {
     ;
     RecipeComponent.prototype.getRecipes = function () {
         var _this = this;
-        this.recipeService.getRecipes().subscribe(function (recipes) { return _this.recipes = recipes; });
+        this.recipeService.getRecipes().subscribe(function (recipes) { return _this.recipes = recipes; }, function (error) { return _this.errorMessage = error; });
     };
     RecipeComponent.prototype.addRecipe = function (name) {
         var _this = this;

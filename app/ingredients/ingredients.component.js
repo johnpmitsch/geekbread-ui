@@ -18,7 +18,6 @@ var IngredientComponent = (function () {
     ;
     IngredientComponent.prototype.ngOnInit = function () {
         this.getIngredients();
-        this.getIngredientType("Flour");
         this.totalDoughWeight = this.totalDoughWeight || 0;
     };
     IngredientComponent.prototype.isFlour = function (ingredient) {
@@ -32,11 +31,13 @@ var IngredientComponent = (function () {
         }
         return total;
     };
-    IngredientComponent.prototype.getSpecifiedIngredientPercentage = function () {
+    IngredientComponent.prototype.getSpecifiedIngredientPercentage = function (ingredientType) {
         var total = 0;
-        for (var _i = 0, _a = this.specifiedIngredients; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
             var ingredient = _a[_i];
-            total += ingredient.percentage;
+            if (ingredient.type == ingredientType) {
+                total += ingredient.percentage;
+            }
         }
         return total;
     };
@@ -59,20 +60,15 @@ var IngredientComponent = (function () {
     IngredientComponent.prototype.submitTotalDoughWeight = function (doughWeight) {
         this.totalDoughWeight = doughWeight;
         this.getFlourWeight();
-        this.getIngredientType("Flour");
-        var flourPercentage = this.getSpecifiedIngredientPercentage();
+        var flourPercentage = this.getSpecifiedIngredientPercentage("Flour");
         this.updateIngredientAmounts();
-        if (!(flourPercentage == 100)) {
+        if (flourPercentage != 100) {
             this.errorMessage = "The flour ingredient percentages for this recipe do not add up to %100. Please correct them and re-submit";
         }
     };
     IngredientComponent.prototype.getIngredients = function () {
         var _this = this;
-        this.ingredientService.getIngredients(this.recipe.id).subscribe(function (ingredients) { return _this.ingredients = ingredients; });
-    };
-    IngredientComponent.prototype.getIngredientType = function (ingredientType) {
-        var _this = this;
-        this.ingredientService.getIngredients(this.recipe.id, ingredientType).subscribe(function (specifiedIngredients) { return _this.specifiedIngredients = specifiedIngredients; });
+        this.ingredientService.getIngredients(this.recipe.id).subscribe(function (ingredients) { return _this.ingredients = ingredients; }, function (error) { return _this.errorMessage = error; });
     };
     IngredientComponent.prototype.deleteIngredient = function (ingredientId) {
         var _this = this;
@@ -82,7 +78,7 @@ var IngredientComponent = (function () {
     IngredientComponent.prototype.updateIngredient = function (ingredientId, name, percentage, type) {
         var _this = this;
         this.ingredientService.updateIngredient(ingredientId, name, percentage, type)
-            .subscribe(function (success) { return _this.ingredients = _this.getIngredients(); }, function (error) { return _this.errorMessage = error; });
+            .subscribe(function (success) { return _this.getIngredients(); }, function (error) { return _this.errorMessage = error; });
         location.reload();
     };
     IngredientComponent.prototype.updateIngredients = function (evt) {

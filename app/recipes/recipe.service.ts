@@ -12,9 +12,9 @@ import { Recipe } from './shared/recipe.model';
 
 @Injectable()
 export class RecipeService {
-  private baseUrl = 'http://localhost:3000/v1/';
-  private recipesUrl = this.baseUrl + 'recipes';
-  private ingredientsUrl = this.baseUrl + 'ingredients';
+  private apiVersion = 'v1'
+  private recipesUrl = this.apiVersion + '/recipes';
+  private ingredientsUrl = this.apiVersion + '/ingredients';
 
   constructor(
     private http: Http,
@@ -22,26 +22,22 @@ export class RecipeService {
   ) {}
 
   getRecipes(): Observable<Recipe[]> {
-    return this.http.get(this.recipesUrl)
-                .map(this.extractData)
-                .catch(this.handleError)
+    return this.tokenService._tokenService.get(this.recipesUrl)
+                                          .map(this.extractData)
   }
 
   getRecipe(id: number): Observable<Recipe> {
-    return this.http.get(this.recipesUrl + "/" + id)
-                    .map(this.extractData)
-                    .catch(this.handleError)
+    return this.tokenService._tokenService.get(this.recipesUrl + "/" + id)
+                                          .map(this.extractData)
   }
 
   addRecipe(name: string): Observable<Recipe> {
     let hi = this.tokenService._tokenService
-    console.log(hi);
     let body = JSON.stringify({recipe: { name }});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.recipesUrl, body, options)
-                    .map(this.extractData)
-                    .catch(this.handleError);
+    return this.tokenService._tokenService.post(this.recipesUrl, body, options)
+                                          .map(this.extractData)
   }
 
 
@@ -49,15 +45,13 @@ export class RecipeService {
     let body = JSON.stringify({ ingredient: { name: name, percentage: percentage, recipe_id: recipeId, type: type }});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.ingredientsUrl, body, options)
-                         .map(this.extractData)
-                         .catch(this.handleError);
+    return this.tokenService._tokenService.post(this.ingredientsUrl, body, options)
+                                          .map(this.extractData)
   }
 
   deleteRecipe(id: number): Observable<Recipe> {
-    return this.http.delete(this.recipesUrl + "/" + id)
-                    .map(this.extractData)
-                    .catch(this.handleError);
+    return this.tokenService._tokenService.delete(this.recipesUrl + "/" + id)
+                                          .map(this.extractData)
   }
 
   private extractData(res: Response) {

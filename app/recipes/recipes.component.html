@@ -10,11 +10,14 @@
 <div class="well well-sm">
   New recipe name:
   <input #newRecipeName (keyup.enter)="addRecipe(newRecipeName.value); newRecipeName.value=''" />
-  <button (click)="addRecipe(newRecipeName.value); newRecipeName.value=''" class="btn btn-default btn-sm">Add</button>
+  <button (click)="addRecipe(newRecipeName.value); newRecipeName.value=''" class="btn btn-primary btn-sm">Add</button>
 </div>
 
 <table class="table">
   <tbody>
+  <div *ngIf="recipes && recipes.length < 1" class="alert alert-info">
+    You have no recipes :( Add an awesome bread recipe above!
+  </div>
   <tr *ngFor="let recipe of recipes" >
     <td (click)="onSelect(recipe)"><a>{{recipe.name}}</a></td>
     <td>

@@ -15,12 +15,14 @@ require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var Observable_1 = require('rxjs/Observable');
+var token_service_1 = require('../users/token.service');
 var IngredientService = (function () {
-    function IngredientService(http) {
+    function IngredientService(http, tokenService) {
         this.http = http;
-        this.baseUrl = 'http://localhost:3000/v1/';
-        this.recipesUrl = this.baseUrl + 'recipes';
-        this.ingredientsUrl = this.baseUrl + 'ingredients';
+        this.tokenService = tokenService;
+        this.apiVersion = 'v1';
+        this.recipesUrl = this.apiVersion + '/recipes';
+        this.ingredientsUrl = this.apiVersion + '/ingredients';
     }
     IngredientService.prototype.getIngredients = function (recipeId, ingredientType) {
         if (ingredientType === void 0) { ingredientType = null; }
@@ -28,23 +30,19 @@ var IngredientService = (function () {
         if (ingredientType != null) {
             url += "?ingredient_type=" + ingredientType;
         }
-        return this.http.get(url)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.tokenService._tokenService.get(url)
+            .map(this.extractData);
     };
     IngredientService.prototype.deleteIngredient = function (ingredientId) {
-        return this.http.delete(this.ingredientsUrl + "/" + ingredientId)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.tokenService._tokenService.delete(this.ingredientsUrl + "/" + ingredientId)
+            .map(this.extractData);
     };
     IngredientService.prototype.updateIngredient = function (ingredientId, name, percentage, type) {
         var body = JSON.stringify({ ingredient: { name: name, percentage: percentage, type: type } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        console.log(body);
-        return this.http.put(this.ingredientsUrl + "/" + ingredientId, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.tokenService._tokenService.put(this.ingredientsUrl + "/" + ingredientId, body, options)
+            .map(this.extractData);
     };
     IngredientService.prototype.extractData = function (res) {
         var body = res.json();
@@ -60,7 +58,7 @@ var IngredientService = (function () {
     };
     IngredientService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, token_service_1.TokenService])
     ], IngredientService);
     return IngredientService;
 }());

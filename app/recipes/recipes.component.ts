@@ -30,7 +30,8 @@ export class RecipeComponent implements OnInit {
   }; 
 
   getRecipes(): void {
-    this.recipeService.getRecipes().subscribe(recipes => this.recipes = recipes);
+    this.recipeService.getRecipes().subscribe(recipes => this.recipes = recipes,
+                                              error   => this.errorMessage = <any>error);
   }
 
   addRecipe(name: string) {

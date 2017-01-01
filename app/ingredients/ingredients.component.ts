@@ -28,7 +28,6 @@ export class IngredientComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIngredients();
-    this.getIngredientType("Flour");
     this.totalDoughWeight = this.totalDoughWeight ||  0;
   }
 
@@ -44,10 +43,12 @@ export class IngredientComponent implements OnInit {
     return total
   }
 
-  getSpecifiedIngredientPercentage(): number {
+  getSpecifiedIngredientPercentage(ingredientType: string): number {
     let total = 0;
-    for (var ingredient of this.specifiedIngredients) {
-      total += ingredient.percentage;
+    for (var ingredient of this.ingredients) {
+      if ingredient.type == ingredientType {
+        total += ingredient.percentage;
+      }
     }
     return total
   }
@@ -72,20 +73,16 @@ export class IngredientComponent implements OnInit {
   submitTotalDoughWeight(doughWeight: number): void {
     this.totalDoughWeight = doughWeight;
     this.getFlourWeight();
-    this.getIngredientType("Flour")
-    let flourPercentage = this.getSpecifiedIngredientPercentage();
+    let flourPercentage = this.getSpecifiedIngredientPercentage("Flour");
     this.updateIngredientAmounts();
-    if !(flourPercentage == 100) {
+    if (flourPercentage != 100) {
       this.errorMessage = "The flour ingredient percentages for this recipe do not add up to %100. Please correct them and re-submit";
     } 
   }
 
   getIngredients(): void {
-    this.ingredientService.getIngredients(this.recipe.id).subscribe(ingredients => this.ingredients = ingredients);
-  }
-
-  getIngredientType(ingredientType: string): void {
-    this.ingredientService.getIngredients(this.recipe.id, ingredientType).subscribe(specifiedIngredients => this.specifiedIngredients = specifiedIngredients);
+    this.ingredientService.getIngredients(this.recipe.id).subscribe(ingredients => this.ingredients = ingredients,
+                                                                    error       => this.errorMessage = <any>error);
   }
 
   deleteIngredient(ingredientId): void {
@@ -96,7 +93,7 @@ export class IngredientComponent implements OnInit {
 
   updateIngredient(ingredientId, name, percentage, type): void {
     this.ingredientService.updateIngredient(ingredientId, name, percentage, type)
-                          .subscribe(success => this.ingredients = this.getIngredients(),
+                          .subscribe(success =>  this.getIngredients(),
                                      error   => this.errorMessage = <any>error);
     location.reload(); 
   }
