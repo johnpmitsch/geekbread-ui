@@ -102,6 +102,9 @@
       </tr>
     </tbody>
   </table>
+  <div *ngIf="ingredients && ingredients.length < 1" class="alert alert-info">
+    You can add ingredients to this recipe below. When you are done you can enter the total dough weight above and calculate your beautiful bread! Recipes are saved automatically
+  </div>
 
   <div class="well well-sm">
     <ingredient-form [recipe]="recipe" (notify)="updateIngredients($event)"></ingredient-form>

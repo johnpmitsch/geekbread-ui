@@ -20,42 +20,36 @@ var RecipeService = (function () {
     function RecipeService(http, tokenService) {
         this.http = http;
         this.tokenService = tokenService;
-        this.baseUrl = 'http://localhost:3000/v1/';
-        this.recipesUrl = this.baseUrl + 'recipes';
-        this.ingredientsUrl = this.baseUrl + 'ingredients';
+        this.apiVersion = 'v1';
+        this.recipesUrl = this.apiVersion + '/recipes';
+        this.ingredientsUrl = this.apiVersion + '/ingredients';
     }
     RecipeService.prototype.getRecipes = function () {
-        return this.http.get(this.recipesUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.tokenService._tokenService.get(this.recipesUrl)
+            .map(this.extractData);
     };
     RecipeService.prototype.getRecipe = function (id) {
-        return this.http.get(this.recipesUrl + "/" + id)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.tokenService._tokenService.get(this.recipesUrl + "/" + id)
+            .map(this.extractData);
     };
     RecipeService.prototype.addRecipe = function (name) {
         var hi = this.tokenService._tokenService;
-        console.log(hi);
         var body = JSON.stringify({ recipe: { name: name } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.recipesUrl, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.tokenService._tokenService.post(this.recipesUrl, body, options)
+            .map(this.extractData);
     };
     RecipeService.prototype.addIngredientToRecipe = function (recipeId, name, percentage, type) {
         var body = JSON.stringify({ ingredient: { name: name, percentage: percentage, recipe_id: recipeId, type: type } });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.ingredientsUrl, body, options)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.tokenService._tokenService.post(this.ingredientsUrl, body, options)
+            .map(this.extractData);
     };
     RecipeService.prototype.deleteRecipe = function (id) {
-        return this.http.delete(this.recipesUrl + "/" + id)
-            .map(this.extractData)
-            .catch(this.handleError);
+        return this.tokenService._tokenService.delete(this.recipesUrl + "/" + id)
+            .map(this.extractData);
     };
     RecipeService.prototype.extractData = function (res) {
         var body = res.json();
