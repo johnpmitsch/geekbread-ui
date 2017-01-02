@@ -27,7 +27,7 @@ var IngredientComponent = (function () {
         var total = 0;
         for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
             var ingredient = _a[_i];
-            total += ingredient.percentage;
+            total += +ingredient.percentage;
         }
         return total;
     };
@@ -36,7 +36,8 @@ var IngredientComponent = (function () {
         for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
             var ingredient = _a[_i];
             if (ingredient.type == ingredientType) {
-                total += ingredient.percentage;
+                console.log(typeof +ingredient.percentage);
+                total += +ingredient.percentage;
             }
         }
         return total;
@@ -54,7 +55,7 @@ var IngredientComponent = (function () {
     IngredientComponent.prototype.updateIngredientAmounts = function () {
         for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
             var ingredient = _a[_i];
-            ingredient.amount = (this.flourWeight * ingredient.percentage) / 100;
+            ingredient.amount = (this.flourWeight * +ingredient.percentage) / 100;
         }
     };
     IngredientComponent.prototype.submitTotalDoughWeight = function (doughWeight) {

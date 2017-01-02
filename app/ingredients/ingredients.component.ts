@@ -38,7 +38,7 @@ export class IngredientComponent implements OnInit {
   getTotalPercentage(): number {
     let total = 0;
     for (var ingredient of this.ingredients) {
-      total += ingredient.percentage;
+      total += +ingredient.percentage;
     }
     return total
   }
@@ -47,7 +47,8 @@ export class IngredientComponent implements OnInit {
     let total = 0;
     for (var ingredient of this.ingredients) {
       if ingredient.type == ingredientType {
-        total += ingredient.percentage;
+        console.log(typeof +ingredient.percentage);
+        total += +ingredient.percentage;
       }
     }
     return total
@@ -66,7 +67,7 @@ export class IngredientComponent implements OnInit {
 
   updateIngredientAmounts(): void {
     for (var ingredient of this.ingredients) {
-      ingredient.amount = (this.flourWeight * ingredient.percentage)/100
+      ingredient.amount = (this.flourWeight * +ingredient.percentage)/100
     }
   }
  

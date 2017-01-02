@@ -23,7 +23,7 @@
       <tr *ngFor="let ingredient of ingredients">
         <td>{{ ingredient.name }}</td>
         <td><i *ngIf="ingredient.type == 'Flour'" class="fa fa-check" aria-hidden="true"></i>  
-        <td>{{ ingredient.percentage }}</td>
+        <td>{{ ingredient.percentage | number:'1.0-1'}}%</td>
         <td><b>{{ ingredient.amount | number:'1.0-0' }}</b></td>
         <td>
           <button	class="btn btn-default btn-sm" 
