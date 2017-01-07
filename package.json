@@ -3,14 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "prestart": "tsc",
-    "start": "tsc && concurrently \"npm run tsc:w\" \"npm run lite\" ",
+    "start": "tsc && npm run-script moveassets && concurrently \"npm run tsc:w\" \"npm run lite\" ",
     "lite": "lite-server",
     "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings",
-     "moveassets": "rsync -a --include='*.css' --include='*.html' --include='*/' --exclude='*' ./app/ ./dist/app/",
-     "watchassets": "onchange 'app/**/*.css' 'app/**/*.html' -e 'dist/app/*' -v -- rsync -a --include='*.css' --include='*.html' --include='*/' --exclude='*' ./app/ ./dist/app/"
+    "moveassets": "rsync -a --include='*.css' --include='*.html' --include='*/' --exclude='*' ./app/ ./dist/app/ && rsync styles.css dist/ && rsync index.html dist/",
+    "watchassets": "onchange 'app/**/*.css' 'app/**/*.html' -e 'dist/app/*' -v -- rsync -a --include='*.css' --include='*.html' --include='*/' --exclude='*' ./app/ ./dist/app/"
   },
   "license": "ISC",
   "dependencies": {
