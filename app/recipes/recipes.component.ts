@@ -5,8 +5,9 @@ import { Recipe } from './shared/recipe.model';
 import { RecipeService } from './recipe.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'my-recipes',
-  templateUrl: 'app/recipes/recipes.component.html',
+  templateUrl: 'recipes.component.html',
   providers: [RecipeService]
 })
 

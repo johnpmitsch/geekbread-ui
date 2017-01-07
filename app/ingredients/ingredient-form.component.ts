@@ -5,8 +5,9 @@ import { Ingredient }    from './shared/ingredient.model';
 import { Recipe }    from '../recipes/shared/recipe.model';
 
 @Component({
+  moduleId: module.id,
   selector: 'ingredient-form',
-  templateUrl: 'app/ingredients/ingredient-form.component.html',
+  templateUrl: 'ingredient-form.component.html',
 })
 
 export class IngredientFormComponent {
