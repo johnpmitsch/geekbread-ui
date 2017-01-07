@@ -1,0 +1,53 @@
+<h2>My Recipes</h2>
+
+<div class="alert alert-danger alert-dismissible" role="alert" *ngIf="errorMessage">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{errorMessage}}
+</div>
+
+<div class="well well-sm">
+  New recipe name:
+  <input #newRecipeName (keyup.enter)="addRecipe(newRecipeName.value); newRecipeName.value=''" />
+  <button (click)="addRecipe(newRecipeName.value); newRecipeName.value=''" class="btn btn-primary btn-sm">Add</button>
+</div>
+
+<table class="table">
+  <tbody>
+  <div *ngIf="recipes && recipes.length < 1" class="alert alert-info">
+    You have no recipes :( Add an awesome bread recipe above!
+  </div>
+  <tr *ngFor="let recipe of recipes" >
+    <td (click)="onSelect(recipe)"><a>{{recipe.name}}</a></td>
+    <td>
+ 				<button	class="btn btn-danger btn-sm" 
+								data-toggle="modal"
+								[attr.data-target]="'#delete' + recipe.id">
+					Delete
+				</button>
+    </td>
+
+    <!-- Delete Recipe Modal -->
+    <div class="modal fade" [attr.id]="'delete' + recipe.id" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="deleteModalLabel">Confirm Delete</h4>
+          </div>
+          <div class="modal-body">
+            Are you sure you want to delete {{ recipe.name }}?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteRecipe(recipe)">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </tr>
+  </tbody>
+</table>
+
+<my-recipe-detail [recipe]="selectedRecipe"></my-recipe-detail>
