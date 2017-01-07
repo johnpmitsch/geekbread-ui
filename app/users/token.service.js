@@ -14,8 +14,7 @@ var TokenService = (function () {
     function TokenService(_tokenService) {
         this._tokenService = _tokenService;
         this._tokenService.init({
-            apiPath: "http://geekbread-154401.appspot-preview.com",
-            //     apiPath:                    "http://localhost:3000"
+            apiPath: "http://localhost:3000",
             signInPath: 'auth/sign_in',
             signInRedirect: 'sign-in',
             signInStoredUrlStorageKey: null,
