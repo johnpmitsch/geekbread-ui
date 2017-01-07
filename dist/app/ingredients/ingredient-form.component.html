@@ -1,0 +1,42 @@
+<div class="container">
+	<div  [hidden]="submitted">
+    <h4>Add Ingredient</h4>
+		<form class="form-inline" *ngIf="active" (ngSubmit)="onSubmit()" #ingredientForm="ngForm">
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" class="form-control" 
+               #ingredientName
+               placeholder="Water"        
+							 required
+							 [(ngModel)]="model.name" name="name"
+							 #name="ngModel" >
+			</div>
+			<div class="form-group">
+				<label for="percentage">Percentage</label>
+				<input #ingredientPercentage
+               type="text" class="form-control" 
+               placeholder="70"
+							 required
+							 [(ngModel)]="model.percentage" name="percentage"
+							 #percentage="ngModel" >
+			</div>
+			<div class="form-group">
+				<label for="type">Type</label>
+				<select #ingredientType
+               type="text" class="form-control" 
+							 required
+							 [(ngModel)]="model.type" name="type"
+							 #type="ngModel" >
+           <option value="Flour">flour</option>     
+           <option value="Other">non-flour</option>     
+        </select>      
+			</div>
+      <button type="button" 
+              class="btn btn-success"
+              (click)="newIngredient(ingredientName.value, ingredientPercentage.value, ingredientType.value)"
+              [disabled]="!ingredientForm.form.valid">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+		</form>
+	</div>
+</div>
