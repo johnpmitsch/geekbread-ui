@@ -8,8 +8,9 @@ import { IngredientFormComponent } from './ingredient-form.component';
 import { Recipe } from '../recipes/shared/recipe.model';
 
 @Component({
+  moduleId: module.id,
   selector: 'recipe-ingredients',
-  templateUrl: 'app/ingredients/ingredients.component.html',
+  templateUrl: 'ingredients.component.html',
   providers: [IngredientService]
 })
 

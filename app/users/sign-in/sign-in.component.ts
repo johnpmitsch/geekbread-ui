@@ -5,8 +5,9 @@ import { Angular2TokenService } from 'angular2-token';
 import { TokenService } from '../token.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'sign-in',
-  templateUrl: 'app/users/sign-in/sign-in.component.html'
+  templateUrl: 'sign-in.component.html'
 })
 
 export class SignInComponent {

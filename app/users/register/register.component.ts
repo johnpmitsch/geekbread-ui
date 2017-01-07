@@ -5,8 +5,9 @@ import { TokenService } from '../token.service';
 import { Router } from '@angular/router';
 
 @Component({
+    moduleId: module.id,
     selector: 'register',
-    templateUrl: 'app/users/register/register.component.html'
+    templateUrl: 'register.component.html'
 })
 export class RegisterComponent {
 

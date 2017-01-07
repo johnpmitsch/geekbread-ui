@@ -4,8 +4,9 @@ import { Response } from '@angular/http';
 import { AuthResponse } from '../auth.model';
 
 @Component({
+    moduleId: module.id,
     selector: 'output',
-    templateUrl: 'app/users/shared/output/output.component.html'
+    templateUrl: 'output.component.html'
 })
 
 export class OutputComponent {
