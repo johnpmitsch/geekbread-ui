@@ -1,0 +1,19 @@
+runtime: python27
+threadsafe: yes
+
+handlers:
+- url: /
+  static_files: index.html
+  upload: index.html
+
+- url: /(.*)
+  static_files: /\1
+  upload: /(.*)
+# Temporary setting to keep gcloud from uploading not required files for deployment
+skip_files:
+- ^README\..*
+- \.gitignore
+- ^\.git$
+- ^package\.json
+- ^tslint\.json
+- ^node_modules/*$
