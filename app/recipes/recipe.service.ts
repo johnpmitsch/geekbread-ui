@@ -34,18 +34,14 @@ export class RecipeService {
   addRecipe(name: string): Observable<Recipe> {
     let hi = this.tokenService._tokenService
     let body = JSON.stringify({recipe: { name }});
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.tokenService._tokenService.post(this.recipesUrl, body, options)
+    return this.tokenService._tokenService.post(this.recipesUrl, body)
                                           .map(this.extractData)
   }
 
 
-  addIngredientToRecipe(recipeId: number, name: string, percentage: number, type: string) {
+  addIngredientToRecipe(recipeId: number, name: string, percentage: number, type: string): Observable<Recipe> {
     let body = JSON.stringify({ ingredient: { name: name, percentage: percentage, recipe_id: recipeId, type: type }});
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.tokenService._tokenService.post(this.ingredientsUrl, body, options)
+    return this.tokenService._tokenService.post(this.ingredientsUrl, body)
                                           .map(this.extractData)
   }
 
