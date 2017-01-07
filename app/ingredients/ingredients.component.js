@@ -36,7 +36,6 @@ var IngredientComponent = (function () {
         for (var _i = 0, _a = this.ingredients; _i < _a.length; _i++) {
             var ingredient = _a[_i];
             if (ingredient.type == ingredientType) {
-                console.log(typeof +ingredient.percentage);
                 total += +ingredient.percentage;
             }
         }

@@ -39,9 +39,7 @@ var IngredientService = (function () {
     };
     IngredientService.prototype.updateIngredient = function (ingredientId, name, percentage, type) {
         var body = JSON.stringify({ ingredient: { name: name, percentage: percentage, type: type } });
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        return this.tokenService._tokenService.put(this.ingredientsUrl + "/" + ingredientId, body, options)
+        return this.tokenService._tokenService.put(this.ingredientsUrl + "/" + ingredientId, body)
             .map(this.extractData);
     };
     IngredientService.prototype.extractData = function (res) {

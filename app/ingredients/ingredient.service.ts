@@ -37,9 +37,7 @@ export class IngredientService {
 
   updateIngredient(ingredientId: number, name: string, percentage: number, type: string): Observable<Ingredient[]> {
     let body = JSON.stringify({ ingredient: { name: name, percentage: percentage, type: type}});
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.tokenService._tokenService.put(this.ingredientsUrl + "/" + ingredientId, body, options)
+    return this.tokenService._tokenService.put(this.ingredientsUrl + "/" + ingredientId, body)
                                           .map(this.extractData)
   }
 

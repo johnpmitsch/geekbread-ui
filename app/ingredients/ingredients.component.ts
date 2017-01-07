@@ -46,8 +46,7 @@ export class IngredientComponent implements OnInit {
   getSpecifiedIngredientPercentage(ingredientType: string): number {
     let total = 0;
     for (var ingredient of this.ingredients) {
-      if ingredient.type == ingredientType {
-        console.log(typeof +ingredient.percentage);
+      if (ingredient.type == ingredientType) {
         total += +ingredient.percentage;
       }
     }

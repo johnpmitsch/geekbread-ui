@@ -35,16 +35,12 @@ var RecipeService = (function () {
     RecipeService.prototype.addRecipe = function (name) {
         var hi = this.tokenService._tokenService;
         var body = JSON.stringify({ recipe: { name: name } });
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        return this.tokenService._tokenService.post(this.recipesUrl, body, options)
+        return this.tokenService._tokenService.post(this.recipesUrl, body)
             .map(this.extractData);
     };
     RecipeService.prototype.addIngredientToRecipe = function (recipeId, name, percentage, type) {
         var body = JSON.stringify({ ingredient: { name: name, percentage: percentage, recipe_id: recipeId, type: type } });
-        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        var options = new http_1.RequestOptions({ headers: headers });
-        return this.tokenService._tokenService.post(this.ingredientsUrl, body, options)
+        return this.tokenService._tokenService.post(this.ingredientsUrl, body)
             .map(this.extractData);
     };
     RecipeService.prototype.deleteRecipe = function (id) {
