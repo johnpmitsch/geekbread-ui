@@ -4,8 +4,14 @@ import { Angular2TokenService } from 'angular2-token';
 @Injectable()
 export class TokenService {
   constructor(public _tokenService: Angular2TokenService) {
-	 this._tokenService.init({
-      apiPath:                    "http://geekbread-154401.appspot-preview.com",
+    if (process.env.ENV === 'production') {
+      var api_path = "http://geekbread-154401.appspot-preview.com"
+    } else {
+      var api_path = 'http://localhost:3000'
+    }
+
+	  this._tokenService.init({
+      apiPath:                    api_path,
 			signInPath:                 'auth/sign_in',
 			signInRedirect:             'sign-in',
 			signInStoredUrlStorageKey:  null,
