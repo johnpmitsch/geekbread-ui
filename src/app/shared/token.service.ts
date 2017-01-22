@@ -4,14 +4,15 @@ import { Angular2TokenService } from 'angular2-token';
 @Injectable()
 export class TokenService {
   constructor(public _tokenService: Angular2TokenService) {
+    console.log(process.env.ENV);
     if (process.env.ENV === 'production') {
-      var api_path = "https://geekbread-154401.appspot-preview.com"
+      var apiPath = "https://geekbread-server.herokuapp.com/"
     } else {
-      var api_path = 'http://localhost:3000'
+      var apiPath = 'http://localhost:3000'
     }
 
 	  this._tokenService.init({
-      apiPath:                    api_path,
+      apiPath:                    apiPath,
 			signInPath:                 'auth/sign_in',
 			signInRedirect:             'sign-in',
 			signInStoredUrlStorageKey:  null,
