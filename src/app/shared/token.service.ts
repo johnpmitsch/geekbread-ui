@@ -5,7 +5,7 @@ import { Angular2TokenService } from 'angular2-token';
 export class TokenService {
   constructor(public _tokenService: Angular2TokenService) {
     if (process.env.ENV === 'production') {
-      var api_path = "http://geekbread-154401.appspot-preview.com"
+      var api_path = "https://geekbread-154401.appspot-preview.com"
     } else {
       var api_path = 'http://localhost:3000'
     }
