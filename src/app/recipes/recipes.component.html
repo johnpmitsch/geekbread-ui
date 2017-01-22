@@ -15,6 +15,9 @@
 
 <table class="table">
   <tbody>
+  <div *ngIf="recipes === nil">
+    <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+  </div>  
   <div *ngIf="recipes && recipes.length < 1" class="alert alert-info">
     You have no recipes :( Add an awesome bread recipe above!
   </div>
