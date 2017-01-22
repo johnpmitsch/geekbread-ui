@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { Angular2TokenService, A2tUiModule } from 'angular2-token';
+import { Angular2TokenService } from 'angular2-token';
 
 import { AppComponent } from './app.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -34,7 +34,6 @@ import { OutputComponent } from './shared/output/output.component';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    A2tUiModule
   ],
   providers: [
     RecipeService,
