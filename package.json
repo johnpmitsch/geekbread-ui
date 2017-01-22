@@ -48,5 +48,9 @@
 
   },
   "devDependencies": {
+  },
+  "engines": {
+     "node": "4.4.7",
+     "npm": "3.10.9"
   }
 }
