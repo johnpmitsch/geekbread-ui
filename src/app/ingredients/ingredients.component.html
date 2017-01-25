@@ -14,9 +14,9 @@
   <thead>
     <td><em>Ingredient</em></td>
     <td><em>Flour?</em></td>
-    <td><em>Percentage</em></td>
-    <td><em>Amount(grams)</em></td>
-    <td><em>Action</em></td>
+    <td><em>percentage</em></td>
+    <td><em>Amount(g)</em></td>
+    <td><em></em></td>
   </thead>
   <tbody>
     <div *ngIf="ingredients === nil">
@@ -28,16 +28,18 @@
       <td>{{ ingredient.percentage | number:'1.0-1'}}%</td>
       <td><b>{{ ingredient.amount | number:'1.0-0' }}</b></td>
       <td>
-        <button	class="btn btn-default btn-sm" 
-                data-toggle="modal"
-                [attr.data-target]="'#edit' + ingredient.id">
-          Edit
-        </button>
-        <button	class="btn btn-danger btn-sm" 
-                data-toggle="modal"
-                [attr.data-target]="'#delete' + ingredient.id">
-          Delete
-        </button>
+        <div class="btn-group" role="group" aria-label="ingredient modify">
+          <button	class="btn btn-default btn-sm" 
+                  data-toggle="modal"
+                  [attr.data-target]="'#edit' + ingredient.id">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+          </button>
+          <button	class="btn btn-danger btn-sm" 
+                  data-toggle="modal"
+                  [attr.data-target]="'#delete' + ingredient.id">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </div>
       </td>
 
       <!-- Delete Ingredient Modal -->
