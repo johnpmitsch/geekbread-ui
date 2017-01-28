@@ -35,7 +35,8 @@ import { Angular2TokenService } from 'angular2-token';
         component: RecipeDetailComponent,
         canActivate: [Angular2TokenService] 
       }
-    ])
+    ],
+    { useHash: true })
   ],
   exports: [
     RouterModule
