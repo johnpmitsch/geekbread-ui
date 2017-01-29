@@ -5,6 +5,7 @@ import { RecipesComponent } from './recipes/recipes.component';
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RegisterComponent } from './register/register.component';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { MissingPageComponent } from './missing-page/missing-page.component';
 
 import { Angular2TokenService } from 'angular2-token';
 
@@ -34,6 +35,10 @@ import { Angular2TokenService } from 'angular2-token';
         path: 'recipe/:id',
         component: RecipeDetailComponent,
         canActivate: [Angular2TokenService] 
+      },
+      {
+        path: '**',
+        component: MissingPageComponent,
       }
     ],
     { useHash: true })
