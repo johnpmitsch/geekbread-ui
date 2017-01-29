@@ -18,6 +18,7 @@ import { RegisterComponent } from './register/register.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { TokenService } from './shared/token.service';
 import { OutputComponent } from './shared/output/output.component';
+import { MissingPageComponent } from './missing-page/missing-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { OutputComponent } from './shared/output/output.component';
     RegisterComponent,
     SignInComponent,
     IngredientFormComponent,
-    OutputComponent
+    OutputComponent,
+    MissingPageComponent
   ],
   imports: [
     BrowserModule,
