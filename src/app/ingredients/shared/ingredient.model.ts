@@ -3,4 +3,5 @@ export class Ingredient {
   percentage: number;
   amount: number;
   type: string;
+  preferment: boolean
 }

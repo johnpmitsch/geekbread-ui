@@ -36,8 +36,17 @@ export class RecipeService {
   }
 
 
-  addIngredientToRecipe(recipeId: number, name: string, percentage: number, type: string): Observable<Recipe> {
-    let body = JSON.stringify({ ingredient: { name: name, percentage: percentage, recipe_id: recipeId, type: type }});
+  addIngredientToRecipe(recipeId: number, name: string, percentage: number, type: string, preferment: boolean): Observable<Recipe> {
+    console.log("addIngtr " + preferment);
+    let body = JSON.stringify({ 
+      ingredient: { 
+        name: name, 
+        percentage: percentage, 
+        recipe_id: recipeId, 
+        type: type, 
+        preferment: preferment 
+      }
+    });
     return this.tokenService._tokenService.post(this.ingredientsUrl, body)
                                           .map(this.extractData)
   }
