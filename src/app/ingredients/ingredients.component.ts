@@ -17,7 +17,8 @@ export class IngredientsComponent implements OnInit {
   @Input() recipe: Recipe;
 
   ingredients: Ingredient[];
-  specifiedIngredients: Ingredient[];
+  prefermentIngredients: Ingredient[];
+  baseIngredients: Ingredient[];
   errorMessage: string;
   totalDoughWeight: number;
   flourWeight: number
@@ -81,20 +82,14 @@ export class IngredientsComponent implements OnInit {
   }
 
   getIngredients(): void {
-    this.ingredientService.getIngredients(this.recipe.id).subscribe(ingredients => this.ingredients = ingredients,
+    this.ingredientService.getIngredients(this.recipe.id).subscribe(ingredients => this.sortIngredients(ingredients),
                                                                     error       => this.errorMessage = <any>error);
   }
 
-  deleteIngredient(ingredientId): void {
-    this.ingredientService.deleteIngredient(ingredientId)
-                          .subscribe(success => this.getIngredients(),
-                                     error   => this.errorMessage = <any>error);
-  }
-
-  updateIngredient(ingredientId, name, percentage, type): void {
-    this.ingredientService.updateIngredient(ingredientId, name, percentage, type)
-                          .subscribe(success =>  this.getIngredients(),
-                                     error   => this.errorMessage = <any>error);
+  sortIngredients(ingredients): void {
+    this.ingredients = ingredients
+    this.baseIngredients = this.ingredients.filter(ingredient => ingredient.preferment === false)
+    this.prefermentIngredients = this.ingredients.filter(ingredient => ingredient.preferment === true)
   }
 
   updateIngredients(evt): void {

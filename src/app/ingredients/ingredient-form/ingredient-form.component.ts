@@ -24,8 +24,9 @@ export class IngredientFormComponent {
   onSubmit() { this.submitted = true; }
   active = true;
 
-  newIngredient(name: string, percentage: number, type: string) {
-    this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage, type)
+  newIngredient(name: string, percentage: number, type: string, preferment: boolean) {
+    console.log(preferment);
+    this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage, type, preferment)
                       .subscribe(sucess => this.notify.emit(null),
                                  error  => this.errorMessage = <any>error);
     

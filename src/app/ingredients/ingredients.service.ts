@@ -32,8 +32,8 @@ export class IngredientService {
                                           .map(this.extractData)
   }
 
-  updateIngredient(ingredientId: number, name: string, percentage: number, type: string): Observable<Ingredient[]> {
-    let body = JSON.stringify({ ingredient: { name: name, percentage: percentage, type: type}});
+  updateIngredient(ingredientId: number, name: string, percentage: number, type: string, preferment: boolean): Observable<Ingredient[]> {
+    let body = JSON.stringify({ ingredient: { name: name, percentage: percentage, type: type, preferment: preferment}});
     return this.tokenService._tokenService.put(this.ingredientsUrl + "/" + ingredientId, body)
                                           .map(this.extractData)
   }

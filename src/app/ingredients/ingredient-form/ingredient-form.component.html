@@ -31,9 +31,16 @@
            <option value="Other">non-flour</option>     
         </select>      
 			</div>
+			<div class="form-group">
+				<input #ingredientPreferment
+               type="checkbox" class="form-control" 
+							 [(ngModel)]="model.preferment" name="preferment"
+							 #preferment="ngModel" >
+				<label for="preferment">Preferment</label>
+			</div>
       <button type="button" 
               class="btn btn-success"
-              (click)="newIngredient(ingredientName.value, ingredientPercentage.value, ingredientType.value)"
+              (click)="newIngredient(ingredientName.value, ingredientPercentage.value, ingredientType.value, ingredientPreferment.checked)"
               [disabled]="!ingredientForm.form.valid">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
       </button>
