@@ -10,16 +10,16 @@
 <button (click)= "submitTotalDoughWeight(totalWeight.value)" class="btn btn-primary btn-sm">Calculate</button>
 </div>
 
-<h3>Preferment</h3>
-Percentage of total flour:
-<input #prefermentPercentage placeholder="5">
-<ingredient-table [ingredients]="prefermentIngredients" (notify)="updateIngredients($event)"></ingredient-table>
+<div *ngIf="prefermentIngredients?.length > 0">
+  <h3>Preferment</h3>
+  <ingredient-table [ingredients]="prefermentIngredients" (notify)="updateIngredients($event)"></ingredient-table>
+</div>
 
-<h3>Dough Formula</h3>
-<ingredient-table [ingredients]="baseIngredients" (notify)="updateIngredients($event)"></ingredient-table>
+  <h3>Dough Formula</h3>
+  <ingredient-table [ingredients]="baseIngredients" (notify)="updateIngredients($event)"></ingredient-table>
 
-<div *ngIf="ingredients && ingredients.length < 1" class="alert alert-info">
-  You can add ingredients to this recipe below. When you are done you can enter the total dough weight above and calculate your beautiful bread! Recipes are saved automatically
+<div *ngIf="ingredients?.length < 1" class="alert alert-info">
+  You can add ingredients to this recipe below. When you are done you can enter the total dough weight above and calculate your dough! Recipes are saved automatically
 </div>
 
 <div class="well well-sm">

@@ -24,11 +24,11 @@ export class IngredientFormComponent {
   onSubmit() { this.submitted = true; }
   active = true;
 
-  newIngredient(name: string, percentage: number, type: string, preferment: boolean) {
-    console.log(preferment);
-    this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage, type, preferment)
-                      .subscribe(sucess => this.notify.emit(null),
-                                 error  => this.errorMessage = <any>error);
+  newIngredient(name: string, percentage: number, flour: boolean, preferment: boolean) {
+    console.log(flour);
+   // this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage, type, preferment)
+   //                   .subscribe(sucess => this.notify.emit(null),
+   //                              error  => this.errorMessage = <any>error);
     
   }
 }
