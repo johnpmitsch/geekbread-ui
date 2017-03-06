@@ -10,9 +10,9 @@
     <div *ngIf="ingredients === nil">
       <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
     </div>     
-    <tr *ngFor="let ingredient of ingredients">
+    <tr [ngClass]="{'info': ingredient.levain }" *ngFor="let ingredient of ingredients">
       <td>{{ ingredient.name }}</td>
-      <td><i *ngIf="ingredient.type == 'Flour'" class="fa fa-check" aria-hidden="true"></i>  
+      <td><i *ngIf="ingredient.flour" class="fa fa-check" aria-hidden="true"></i>  
       <td>{{ ingredient.percentage | number:'1.0-1'}}%</td>
       <td><b>{{ ingredient.amount | number:'1.0-0' }}</b></td>
       <td>
@@ -71,12 +71,10 @@
                        [value]="ingredient.percentage">
               </div>
               <div>
-                <label for="type">Type</label>
-                <select #ingredientType
-                       [value]="ingredient.type">
-                   <option value="Flour">flour</option>     
-                   <option value="Other">non-flour</option>     
-                </select>      
+                <input #ingredientFlour
+                       type="checkbox"
+                       [checked]="ingredient.flour">
+                <label for="flour">Flour</label>
               </div>
               <div>
                 <input #ingredientPreferment
@@ -90,7 +88,11 @@
               <button type="button" 
                       class="btn btn-success"
                       data-dismiss="modal"
-                      (click)="updateIngredient(ingredient.id, ingredientName.value, ingredientPercentage.value, ingredientType.value, ingredient.preferment)">
+                      (click)="updateIngredient(ingredient.id, 
+                                                ingredientName.value,
+                                                ingredientPercentage.value, 
+                                                ingredientFlour.checked,
+                                                ingredientPreferment.checked)">
                 Update Ingredient
               </button>
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

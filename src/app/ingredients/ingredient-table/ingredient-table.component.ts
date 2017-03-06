@@ -27,8 +27,8 @@ export class IngredientTableComponent {
                                      error   => this.errorMessage = <any>error);
   }
 
-  updateIngredient(ingredientId, name, percentage, type, preferment): void {
-    this.ingredientService.updateIngredient(ingredientId, name, percentage, type, preferment)
+  updateIngredient(ingredientId, name, percentage, flour, preferment): void {
+    this.ingredientService.updateIngredient(ingredientId, name, percentage, flour, preferment)
                           .subscribe(success => this.notify.emit(null),
                                      error   => this.errorMessage = <any>error);
   }

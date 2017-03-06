@@ -25,10 +25,9 @@ export class IngredientFormComponent {
   active = true;
 
   newIngredient(name: string, percentage: number, flour: boolean, preferment: boolean) {
-    console.log(flour);
-   // this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage, type, preferment)
-   //                   .subscribe(sucess => this.notify.emit(null),
-   //                              error  => this.errorMessage = <any>error);
-    
+    this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage, flour, preferment)
+                      .subscribe(sucess => this.notify.emit(null),
+                                 error  => this.errorMessage = <any>error);
+   
   }
 }
