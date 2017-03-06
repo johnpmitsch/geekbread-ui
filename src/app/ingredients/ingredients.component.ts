@@ -21,7 +21,8 @@ export class IngredientsComponent implements OnInit {
   baseIngredients: Ingredient[];
   errorMessage: string;
   totalDoughWeight: number;
-  flourWeight: number
+  baseFlourWeight: number
+  prefermentFlourWeight: number;
 
   constructor(
     private ingredientService: IngredientService
@@ -32,22 +33,44 @@ export class IngredientsComponent implements OnInit {
     this.totalDoughWeight = this.totalDoughWeight ||  0;
   }
 
-  isFlour?(ingredient): boolean {
-    return ingredient.type == "Flour";
-  }
-
-  getTotalPercentage(): number {
+  getTotalPercentage(prefermentIngredientsOnly: boolean = false): number {
     let total = 0;
-    for (var ingredient of this.ingredients) {
+    if (prefermentIngredientsOnly) {
+      var ingredients = this.prefermentIngredients
+    } else {
+      var ingredients = this.baseIngredients
+    }
+    for (var ingredient of ingredients) {
       total += +ingredient.percentage;
     }
     return total
   }
 
+  getBaseIngredientFlourPercentage(): number {
+    let total = 0
+    for (var ingredient of this.baseIngredients) {
+      if (ingredient.flour) {
+        total += +ingredient.percentage;
+      }
+    }
+    return total
+  }
+
+  getPrefermentIngredientFlourPercentage(): number {
+    let total = 0
+    for (var ingredient of this.prefermentIngredients) {
+      if (ingredient.flour) {
+        total += +ingredient.percentage;
+      }
+    }
+    return total
+  }
+
   getSpecifiedIngredientPercentage(ingredientType: string): number {
+    // ingredientType can be preferment, levain, and flour as they are all booleans
     let total = 0;
     for (var ingredient of this.ingredients) {
-      if (ingredient.type == ingredientType) {
+      if (ingredient[ingredientType]) {
         total += +ingredient.percentage;
       }
     }
@@ -56,7 +79,7 @@ export class IngredientsComponent implements OnInit {
 
   getFlourWeight(): void {
     let totalPercentage = this.getTotalPercentage();
-    this.flourWeight = (this.totalDoughWeight / totalPercentage) * 100;
+    this.baseFlourWeight = (this.totalDoughWeight / totalPercentage) * 100;
   }
 
   resetIngredientAmounts(): void {
@@ -65,18 +88,34 @@ export class IngredientsComponent implements OnInit {
     }
   }
 
-  updateIngredientAmounts(): void {
-    for (var ingredient of this.ingredients) {
-      ingredient.amount = (this.flourWeight * +ingredient.percentage)/100
+  updateBaseIngredientAmounts(): void {
+    for (var ingredient of this.baseIngredients) {
+      ingredient.amount = (this.baseFlourWeight * +ingredient.percentage)/100
+    }
+  }
+
+  updatePrefermentIngredientAmounts(): void {
+    let levainPercentage = this.getSpecifiedIngredientPercentage("levain");
+    let levainTotalWeight = (this.baseFlourWeight * levainPercentage)/100; 
+    let totalPrefermentIngredientPercentage = this.getTotalPercentage(true);
+    this.prefermentFlourWeight = (levainTotalWeight / totalPrefermentIngredientPercentage) * 100;
+    for (var ingredient of this.prefermentIngredients) {
+      ingredient.amount = (this.prefermentFlourWeight * +ingredient.percentage)/100
     }
   }
  
   submitTotalDoughWeight(doughWeight: number): void {
     this.totalDoughWeight = doughWeight;
     this.getFlourWeight();
-    let flourPercentage = this.getSpecifiedIngredientPercentage("Flour");
-    this.updateIngredientAmounts();
-    if (flourPercentage != 100) {
+    let baseFlourPercentage = this.getBaseIngredientFlourPercentage();
+    if (this.prefermentIngredients.length) {
+      var prefermentFlourPercentage = this.getPrefermentIngredientFlourPercentage();
+    } else {
+      var prefermentFlourPercentage = 100;
+    }
+    this.updateBaseIngredientAmounts();
+    this.updatePrefermentIngredientAmounts();
+    if (baseFlourPercentage != 100 || prefermentFlourPercentage != 100) {
       this.errorMessage = "The flour ingredient percentages for this recipe do not add up to %100. Please correct them and re-submit";
     } 
   }

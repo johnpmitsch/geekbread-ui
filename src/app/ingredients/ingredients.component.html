@@ -15,8 +15,10 @@
   <ingredient-table [ingredients]="prefermentIngredients" (notify)="updateIngredients($event)"></ingredient-table>
 </div>
 
+<div>
   <h3>Dough Formula</h3>
   <ingredient-table [ingredients]="baseIngredients" (notify)="updateIngredients($event)"></ingredient-table>
+</div>
 
 <div *ngIf="ingredients?.length < 1" class="alert alert-info">
   You can add ingredients to this recipe below. When you are done you can enter the total dough weight above and calculate your dough! Recipes are saved automatically

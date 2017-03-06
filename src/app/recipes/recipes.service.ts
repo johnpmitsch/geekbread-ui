@@ -36,14 +36,13 @@ export class RecipeService {
   }
 
 
-  addIngredientToRecipe(recipeId: number, name: string, percentage: number, type: string, preferment: boolean): Observable<Recipe> {
-    console.log("addIngtr " + preferment);
+  addIngredientToRecipe(recipeId: number, name: string, percentage: number, flour: boolean, preferment: boolean): Observable<Recipe> {
     let body = JSON.stringify({ 
       ingredient: { 
         name: name, 
         percentage: percentage, 
         recipe_id: recipeId, 
-        type: type, 
+        flour: flour, 
         preferment: preferment 
       }
     });
