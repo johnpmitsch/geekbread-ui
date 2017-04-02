@@ -7,7 +7,7 @@
   
 		<form #registerForm="ngForm" (ngSubmit)="onSubmit()">
 			<div class="form-group">
-				<label for="formGroupExampleInput">Email</label>
+				<label>Email</label>
 				<input type="text"
 					class="form-control"
 					placeholder="Email"
@@ -16,7 +16,7 @@
 					name="email">
 			</div>
 			<div class="form-group">
-				<label for="formGroupExampleInput">Password</label>
+				<label>Password</label>
 				<input type="password"
 					class="form-control"
 					placeholder="Password"
@@ -25,13 +25,22 @@
 					name="password">
 			</div>
 			<div class="form-group">
-				<label for="formGroupExampleInput">Password Confirmation</label>
+				<label>Password Confirmation</label>
 				<input type="password"
 					class="form-control"
 					placeholder="Password Confirmation"
 					required
 					[(ngModel)]="_registerData.passwordConfirmation"
 					name="passwordConfirmation">
+			</div>
+			<div class="form-group">
+				<label>Beta key</label>
+				<input type="text"
+					class="form-control"
+					placeholder="enter your provided beta key"
+					required
+					[(ngModel)]="_registerData.beta_key"
+					name="beta_key">
 			</div>
 			<button
 				type="submit"
