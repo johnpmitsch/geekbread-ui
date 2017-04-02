@@ -28,6 +28,6 @@ export class IngredientFormComponent {
     this.recipeService.addIngredientToRecipe(this.recipe.id, name, percentage, flour, preferment)
                       .subscribe(sucess => this.notify.emit(null),
                                  error  => this.errorMessage = <any>error);
-   
+    this.model = new Ingredient;
   }
 }
