@@ -7,6 +7,7 @@ import { Recipe }    from '../../recipes/shared/recipe.model';
 @Component({
   selector: 'ingredient-form',
   templateUrl: './ingredient-form.component.html',
+  styleUrls: ['ingredient-form.component.css']
 })
 
 export class IngredientFormComponent {

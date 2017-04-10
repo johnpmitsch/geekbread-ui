@@ -1,3 +1,16 @@
 inline {
   display:inline;
 }
+
+a.accordion-toggle {
+  color: black;
+}
+
+a.accordion-toggle:hover {
+  color: black;
+}
+
+.nopadding {
+  padding: 0 !important;
+  margin: 0 !important;
+}
