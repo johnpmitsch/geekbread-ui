@@ -1,45 +1,53 @@
-<div class="container">
-	<div  [hidden]="submitted">
-    <h4>Add Ingredient</h4>
-		<form class="form-inline" *ngIf="active" (ngSubmit)="onSubmit()" #ingredientForm="ngForm">
-			<div class="form-group">
-				<label for="name">Name</label>
-				<input type="text" class="form-control" 
-               #ingredientName
-               placeholder="Water"        
-							 required
-							 [(ngModel)]="model.name" name="name"
-							 #name="ngModel" >
-			</div>
-			<div class="form-group">
-				<label for="percentage">Percentage</label>
-				<input #ingredientPercentage
-               type="text" class="form-control" 
-               placeholder="70"
-							 required
-							 [(ngModel)]="model.percentage" name="percentage"
-							 #percentage="ngModel" >
-			</div>
-			<div class="form-group">
-				<input #ingredientFlour
-               type="checkbox" class="form-control" 
-							 [(ngModel)]="model.flour" name="flour"
-							 #type="ngModel" >
-				<label for="flour">Flour</label>
-			</div>
-			<div class="form-group">
-				<input #ingredientPreferment
-               type="checkbox" class="form-control" 
-							 [(ngModel)]="model.preferment" name="preferment"
-							 #preferment="ngModel" >
-				<label for="preferment">Preferment</label>
-			</div>
-      <button type="button" 
-              class="btn btn-success"
-              (click)="newIngredient(ingredientName.value, ingredientPercentage.value, ingredientFlour.checked, ingredientPreferment.checked)"
-              [disabled]="!ingredientForm.form.valid">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      </button>
-		</form>
-	</div>
+<div class="col-xs-12 well" [hidden]="submitted">
+  <div class="accordion" id="addIngredientAccordion">
+    <div class="accordion-group">
+      <div class="col-xs-12 nopadding accordion-heading">
+        <h4 class="pull-left toggle">Add Ingredient</h4>
+      </div>
+      <div id="collapseOne" class="accordion-body collapse in">
+        <div class="accordion-inner">
+          <form class="form-inline" *ngIf="active" (ngSubmit)="onSubmit()" #ingredientForm="ngForm">
+            <div class="col-md-12 nopadding form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control"
+                     #ingredientName
+                     placeholder="Water"
+                     required
+                     [(ngModel)]="model.name" name="name"
+                     #name="ngModel" >
+            </div>
+            <div class="col-md-12 nopadding form-group">
+              <label for="percentage">Percentage</label>
+              <input #ingredientPercentage
+                     type="text" class="form-control"
+                     placeholder="70"
+                     required
+                     [(ngModel)]="model.percentage" name="percentage"
+                     #percentage="ngModel" >
+            </div>
+            <div class="col-md-12 nopadding form-group">
+              <input #ingredientFlour
+                     type="checkbox"
+                     [(ngModel)]="model.flour" name="flour"
+                     #type="ngModel" >
+              <label for="flour">Flour</label>
+              <br />
+              <input #ingredientPreferment
+                     type="checkbox"
+                     [(ngModel)]="model.preferment" name="preferment"
+                     #preferment="ngModel" >
+              <label for="preferment">Preferment</label>
+            </div>
+            <div class="col-md-12 nopadding">
+              <button type="button"
+                      class="btn btn-success"
+                      (click)="newIngredient(ingredientName.value, ingredientPercentage.value, ingredientFlour.checked, ingredientPreferment.checked)"
+                      [disabled]="!ingredientForm.form.valid">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
 </div>
