@@ -1,9 +1,9 @@
 <div class="col-xs-12 well" [hidden]="submitted">
   <div class="accordion" id="addIngredientAccordion">
     <div class="accordion-group">
-      <div class="col-xs-12 nopadding accordion-heading">
-        <h4 class="pull-left toggle">Add Ingredient</h4>
-      </div>
+			<div class="col-xs-12 nopadding accordion-heading">
+				<h4 class="pull-left toggle">Add Ingredient</h4>
+			</div>
       <div id="collapseOne" class="accordion-body collapse in">
         <div class="accordion-inner">
           <form class="form-inline" *ngIf="active" (ngSubmit)="onSubmit()" #ingredientForm="ngForm">

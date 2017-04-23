@@ -5,7 +5,7 @@ import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'my-app',
-  templateUrl: './app.component.html' 
+  templateUrl: './app.component.html'
 })
 
 export class AppComponent  {
