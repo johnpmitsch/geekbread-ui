@@ -1,4 +1,20 @@
-.nopadding {
-  padding: 0 !important;
-  margin: 0 !important;
+.navbar {
+  margin-bottom: 0px;
+  background-color: black;
+  border-color: black;
+}
+
+.navbar-brand {
+  color: white;
+  font-size: 25px;
+  margin-left: 30px;
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+  padding-right: 30px;
+}
+
+.geekbread-container {
+  background-color: #f3f3f3;
 }
