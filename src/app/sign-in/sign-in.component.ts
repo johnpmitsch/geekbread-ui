@@ -5,7 +5,8 @@ import { TokenService } from '../shared/token.service';
 
 @Component({
   selector: 'sign-in',
-  templateUrl: './sign-in.component.html'
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['sign-in.component.css'],
 })
 
 export class SignInComponent {
