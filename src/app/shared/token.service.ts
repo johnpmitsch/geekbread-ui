@@ -12,6 +12,7 @@ export class TokenService {
 			signInStoredUrlStorageKey:  null,
 
 			signOutPath:                'auth/sign_out',
+      signOutFailedValidate:      true,
 
 			registerAccountPath:        'auth',
 			deleteAccountPath:          'auth',

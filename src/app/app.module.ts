@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule } from '@angular/http';
 import { Routes } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 
 import { Angular2TokenService } from 'angular2-token';
+import { AuthenticatedHttpService }  from './lib/authenticated-http-service';
 
 import { AppComponent } from './app.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -44,7 +45,8 @@ import { IngredientTableComponent } from './ingredients/ingredient-table/ingredi
     RecipeService,
 		IngredientService,
 		TokenService,
-		Angular2TokenService
+		Angular2TokenService,
+    { provide: Http, useClass: AuthenticatedHttpService }
   ],
   bootstrap: [AppComponent]
 })
