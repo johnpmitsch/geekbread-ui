@@ -24,7 +24,7 @@ export class RecipesComponent implements OnInit {
     this.getRecipes();
   }
 
-  onSelect(recipe: Recipe): void { 
+  recipeRedirect(recipe: Recipe): void { 
     this.selectedRecipe = recipe; 
     this.router.navigate(['/recipe', this.selectedRecipe.id]);
   }; 
@@ -37,7 +37,7 @@ export class RecipesComponent implements OnInit {
   addRecipe(name: string) {
     if (!name) { return; } 
     this.recipeService.addRecipe(name)
-                      .subscribe(recipe   => this.onSelect(recipe),
+                      .subscribe(recipe  => this.recipeRedirect(recipe),
                                  error    => this.errorMessage = <any>error);
     this.getRecipes();
   }
