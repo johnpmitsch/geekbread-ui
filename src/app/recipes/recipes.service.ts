@@ -29,7 +29,6 @@ export class RecipeService {
   }
 
   addRecipe(name: string): Observable<Recipe> {
-    let hi = this.tokenService._tokenService
     let body = JSON.stringify({recipe: { name }});
     return this.tokenService._tokenService.post(this.recipesUrl, body)
                                           .map(this.extractData)
