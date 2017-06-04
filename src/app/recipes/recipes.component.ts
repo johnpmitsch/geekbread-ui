@@ -37,7 +37,7 @@ export class RecipesComponent implements OnInit {
   addRecipe(name: string) {
     if (!name) { return; } 
     this.recipeService.addRecipe(name)
-                      .subscribe(success  => this.getRecipes(),
+                      .subscribe(recipe   => this.onSelect(recipe),
                                  error    => this.errorMessage = <any>error);
     this.getRecipes();
   }
@@ -47,4 +47,5 @@ export class RecipesComponent implements OnInit {
                       .subscribe(sucess => this.getRecipes(),
                                  error  => this.errorMessage = <any>error);
   }
+
 }
