@@ -22,7 +22,7 @@
     You have no recipes :( Add an awesome bread recipe above!
   </div>
   <tr *ngFor="let recipe of recipes" >
-    <td (click)="onSelect(recipe)"><a>{{recipe.name}}</a></td>
+    <td (click)="recipeRedirect(recipe)"><a>{{recipe.name}}</a></td>
     <td>
  				<button	class="btn btn-danger btn-sm" 
 								data-toggle="modal"
