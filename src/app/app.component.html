@@ -13,10 +13,14 @@
       <li *ngIf="currentUserSignedIn()"><a routerLink="/recipes">My Recipes</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li *ngIf="!currentUserSignedIn()"><a routerLink="/sign-in">Sign in</a></li>
-      <li *ngIf="currentUserSignedIn()">
-        <a (click)="signOut()"> Sign out</a>
-      </li>
+			<li *ngIf="currentUserSignedIn()" class="dropdown">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ nickname() }}<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+          <li><a routerLink="/reset-password">Reset Password</a></li>
+					<li><a (click)="signOut()">Sign out</a></li>
+				</ul>
+			</li>
+      <li><a *ngIf="!currentUserSignedIn() && !currentPageIsSignIn()" routerLink="/sign-in">Sign in</a></li>
     </ul>
   </div>
 </nav>

@@ -21,6 +21,7 @@ import { TokenService } from './shared/token.service';
 import { OutputComponent } from './shared/output/output.component';
 import { MissingPageComponent } from './missing-page/missing-page.component';
 import { IngredientTableComponent } from './ingredients/ingredient-table/ingredient-table.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { IngredientTableComponent } from './ingredients/ingredient-table/ingredi
     IngredientFormComponent,
     OutputComponent,
     MissingPageComponent,
-    IngredientTableComponent
+    IngredientTableComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

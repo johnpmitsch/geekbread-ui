@@ -6,6 +6,7 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RegisterComponent } from './register/register.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { MissingPageComponent } from './missing-page/missing-page.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 import { Angular2TokenService } from 'angular2-token';
 
@@ -29,6 +30,11 @@ import { Angular2TokenService } from 'angular2-token';
       {
         path: 'recipes',
         component: RecipesComponent,
+        canActivate: [Angular2TokenService] 
+      },
+      {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
         canActivate: [Angular2TokenService] 
       },
       {
