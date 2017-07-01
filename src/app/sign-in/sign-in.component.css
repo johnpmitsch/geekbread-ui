@@ -24,6 +24,10 @@
 	text-shadow: -4px 3px 10px white;
 }
 
+.overlay-text-white-bg {
+  background-color: white;
+}
+
 .jumbotron-bg {
   background-image: url('/assets/baking-hands-lg.jpg');
   background-position: 0% 25%;

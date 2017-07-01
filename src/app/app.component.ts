@@ -32,4 +32,21 @@ export class AppComponent  {
         this._output    = error;
     });
 	}
+
+  currentUser() {
+    return this.tokenService._tokenService.currentUserData;
+	}
+
+  nickname() {
+    let current_user = this.currentUser();  
+    if (current_user) {
+      return current_user.nickname;
+    } else {
+      return ""; 
+    }
+  }
+
+  currentPageIsSignIn() {
+    return this.router.url === "/sign-in";
+  }
 }
